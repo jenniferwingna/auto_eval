@@ -124,6 +124,51 @@ def build():
             groups[sp] = []
         groups[sp].append(c)
 
+    # Paper group descriptions (Chinese methodology + insight summary for each group)
+    group_descriptions = {
+        "bfcl-v4, toolsandbox-2024, traject-bench-2026, tau2-bench-2024": {
+            "papers": "BFCL v4 · ToolSandbox · TRAJECT-Bench · τ²-bench",
+            "methodology": "BFCL v4 定义了有状态多轮函数调用评测标准；ToolSandbox 提出「里程碑 DAG」进行轨迹级评分；TRAJECT-Bench 揭示了「相似工具混淆」和「参数盲选」两大隐藏失败模式；τ²-bench 强调工具编排质量和错误恢复能力。",
+            "insight": "单轮静态评测会高估实际性能 15-30%。评测必须追踪车辆状态跨轮变化，记录工具调用的完整轨迹而非只看最终结果。",
+        },
+        "agent-survey-2026, toolsandbox-2024, mcp-agentbench-2025": {
+            "papers": "Agent Survey (ACL 2026) · ToolSandbox · MCP-AgentBench",
+            "methodology": "ACL 2026 Agent 评测综述确立了「最终答案→执行轨迹→逐轮交互」三层评测架构；ToolSandbox 的里程碑 DAG 实现了中间步骤质量评估；MCP-AgentBench 提出「规则检查(80%)+LLM-judge(20%)」的双层判分方案。",
+            "insight": "为 hard 组合题设计显式的里程碑（Milestone）路径。每一步工具调用都应有对应的验证点，而非只检查最终车辆状态。",
+        },
+        "traject-bench-2026, api-bank-2023, bfcl-v4": {
+            "papers": "TRAJECT-Bench · API-Bank · BFCL v4",
+            "methodology": "TRAJECT-Bench 发现「相似工具混淆」是 Agent 工具调用中最主要的失败模式——当两个工具描述重叠时（如 shade_curtain_opener vs shade_curtain_switch），模型选错工具的概率高达 40%+。API-Bank 将工具使用分解为规划→检索→执行三步，发现检索错误远多于参数错误。",
+            "insight": "评测集必须覆盖功能相近的工具对（如 mirror_fold vs mirror_adjust、fragrance_switch vs fragrance_mode），测试模型在工具描述歧义下的辨别能力。",
+        },
+        "metatool-2024, bfcl-v4, api-bank-2023": {
+            "papers": "MetaTool · BFCL v4 · API-Bank",
+            "methodology": "MetaTool 首次将「相关性检测」——知道何时不调用工具——作为一等评测标准。实验表明模型在 20-40% 的无关查询中仍会触发工具调用。BFCL v4 将 relevance detection 纳入核心评测维度。",
+            "insight": "评测集中负例（不该调用工具的 query）占比应从 15% 提升到 20-25%。关键是设计「微妙负例」——参数合法但语义矛盾、跨域混淆、闲聊中暗含功能词汇——而非明显错误。",
+        },
+        "car-mem-bench-2025, agent-survey-2026": {
+            "papers": "CarMem · Agent Survey (ACL 2026)",
+            "methodology": "CarMem 定义了车载语音助手的 5 种记忆操作（提取→存储→检索→更新→遗忘），发现多用户记忆隔离对大多数模型近乎为零能力。ACL 2026 综述将记忆和个性化列为「最欠评测的 Agent 能力」之一。",
+            "insight": "记忆评测需要跨会话设计：偏好提取（本轮对话）、偏好存储和检索（下一趟行程）、偏好更新和冲突（新旧偏好矛盾）、多用户隔离（主驾 vs 副驾 vs 后排）——四个维度缺一不可。",
+        },
+        "stable-toolbench-2024, helm-2023": {
+            "papers": "StableToolBench · HELM",
+            "methodology": "StableToolBench 证明了真实 API 基准在 6 个月内因 API 变更丢失 15-30% 的测试用例。解决方案是版本化的 API 快照 + 模拟稳定 API 服务器。HELM 确立了「场景 × 指标」的标准化评测协议和透明度原则。",
+            "insight": "我们的 tools_manifest.json（547 工具）是天然的稳定 API 快照。每次评测集发布应绑定工具清单版本号，注入测试用例应可精确复现（同样的错误注入→同样的拦截结果）。",
+        },
+    }
+
+    # Find description for each group (fuzzy match)
+    def get_group_desc(sp_key):
+        # Exact match first
+        if sp_key in group_descriptions:
+            return group_descriptions[sp_key]
+        # Fuzzy: check if key contains the sp_key or vice versa
+        for gk, gd in group_descriptions.items():
+            if sp_key in gk or gk in sp_key:
+                return gd
+        return None
+
     approved_count = 0; rejected_count = 0  # placeholder; actual counting in JS
     cases_html = ""
     for sp, case_list in groups.items():
@@ -160,6 +205,16 @@ def build():
               </div>
             </div>'''
 
+        desc = get_group_desc(sp)
+        desc_html = ""
+        if desc:
+            desc_html = f'''
+            <div class="cgroup-desc">
+              <div class="cgdesc-row"><b>📚 来源论文:</b> {desc["papers"]}</div>
+              <div class="cgdesc-row"><b>🔬 核心方法论:</b> {desc["methodology"]}</div>
+              <div class="cgdesc-row"><b>💡 对车控评测的启示:</b> {desc["insight"]}</div>
+            </div>'''
+
         cases_html += f'''
         <div class="case-group">
           <div class="cgroup-header" onclick="toggleGroup('{gid}')">
@@ -169,6 +224,7 @@ def build():
             <span class="cgroup-stats" id="stats-{gid}"></span>
           </div>
           <div class="cgroup-body" id="group-{gid}">
+            {desc_html}
             {case_cards}
           </div>
         </div>'''
@@ -309,6 +365,10 @@ nav{{background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-ind
 .cgroup-stats{{font-size:11px;margin-left:auto}}
 .cgroup-body{{padding:12px 18px;display:block}}
 .cgroup-body.collapsed{{display:none}}
+.cgroup-desc{{margin:0 0 12px 0;padding:14px 16px;background:linear-gradient(135deg,#f0f9ff,#f8fafc);border:1px solid #e0e7ff;border-radius:8px;font-size:12px;line-height:1.6}}
+.cgdesc-row{{margin-bottom:6px;color:#334155}}
+.cgdesc-row b{{color:#0f172a}}
+.cgdesc-row:last-child{{margin-bottom:0}}
 
 /* EVAL CARDS */
 .ecard{{background:#fff;border:1px solid #f1f5f9;border-left:3px solid #f59e0b;border-radius:6px;padding:12px 14px;margin-bottom:8px;transition:all .15s}}
