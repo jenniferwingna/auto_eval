@@ -215,8 +215,6 @@ def build():
               <div class="cgdesc-row"><b>💡 对车控评测的启示:</b> {desc["insight"]}</div>
             </div>'''
 
-        desc_json = json.dumps({"papers": desc["papers"], "methodology": desc["methodology"], "insight": desc["insight"]}, ensure_ascii=False) if desc else "null"
-
         cases_html += f'''
         <div class="case-group">
           <div class="cgroup-header" onclick="toggleGroup('{gid}')">
@@ -224,7 +222,6 @@ def build():
             <span class="cgroup-title">📄 {sp}</span>
             <span class="cgroup-count">{n} 条用例</span>
             <span class="cgroup-stats" id="stats-{gid}"></span>
-            <button class="act-btn gen-more" onclick="event.stopPropagation();batchGenerate({desc_json})" title="基于这篇论文的方法论继续生成用例" style="font-size:10px;margin-left:8px">🤖 继续生成</button>
           </div>
           <div class="cgroup-body" id="group-{gid}">
             {desc_html}
@@ -387,47 +384,6 @@ nav{{background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-ind
 .act-note{{flex:1;min-width:120px;padding:3px 8px;border:1px solid #e2e8f0;border-radius:5px;font-size:11px;outline:none}}
 .act-note:focus{{border-color:#3b82f6}}
 
-/* CHAT WINDOW */
-.chat-toggle{{position:fixed;bottom:20px;right:20px;width:52px;height:52px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;border:none;border-radius:50%;font-size:24px;cursor:pointer;box-shadow:0 4px 16px rgba(59,130,246,.35);z-index:300;transition:all .2s}}
-.chat-toggle:hover{{transform:scale(1.08);box-shadow:0 6px 20px rgba(59,130,246,.45)}}
-.chat-toggle.open{{background:#ef4444}}
-.chat-panel{{position:fixed;bottom:80px;right:20px;width:420px;max-height:560px;background:#fff;border-radius:14px;box-shadow:0 8px 40px rgba(0,0,0,.15);z-index:299;display:none;flex-direction:column;overflow:hidden;border:1px solid #e2e8f0}}
-.chat-panel.visible{{display:flex}}
-.chat-header{{padding:14px 18px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;font-weight:700;font-size:15px;display:flex;justify-content:space-between;align-items:center}}
-.chat-header button{{background:none;border:none;color:#fff;font-size:18px;cursor:pointer;opacity:.8}}
-.chat-header button:hover{{opacity:1}}
-.chat-messages{{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:200px;max-height:320px}}
-.chat-msg{{max-width:85%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5;word-break:break-word}}
-.chat-msg.user{{align-self:flex-end;background:#eff6ff;color:#1e40af;border-bottom-right-radius:4px}}
-.chat-msg.assistant{{align-self:flex-start;background:#f8fafc;color:#334155;border-bottom-left-radius:4px;border:1px solid #f1f5f9}}
-.chat-msg.loading{{background:#f1f5f9;color:#94a3b8;font-style:italic}}
-.chat-input-area{{padding:10px 14px;border-top:1px solid #f1f5f9;display:flex;gap:8px}}
-.chat-input-area input{{flex:1;padding:8px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;outline:none}}
-.chat-input-area input:focus{{border-color:#3b82f6}}
-.chat-input-area button{{padding:8px 16px;background:#3b82f6;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600}}
-.chat-input-area button:hover{{background:#2563eb}}
-.chat-server-status{{font-size:10px;color:#94a3b8;text-align:center;padding:4px}}
-.chat-server-status.online{{color:#10b981}}
-
-@media(max-width:768px){{
-  .chat-panel{{width:calc(100vw - 32px);right:16px;bottom:76px;max-height:50vh}}
-}}
-
-/* GENERATE MODAL */
-.gen-modal-overlay{{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:400;display:none;align-items:center;justify-content:center}}
-.gen-modal-overlay.visible{{display:flex}}
-.gen-modal{{background:#fff;border-radius:14px;padding:24px;width:480px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,.2)}}
-.gen-modal h3{{font-size:18px;margin-bottom:16px}}
-.gen-modal label{{display:block;font-size:13px;font-weight:600;color:#334155;margin-bottom:4px;margin-top:12px}}
-.gen-modal input,.gen-modal textarea,.gen-modal select{{width:100%;padding:8px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;outline:none;margin-bottom:4px}}
-.gen-modal textarea{{resize:vertical;min-height:60px}}
-.gen-modal input:focus,.gen-modal textarea:focus{{border-color:#3b82f6}}
-.gen-modal .btn-row{{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}}
-.gen-modal .btn-row button{{padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}}
-.gen-modal .btn-primary{{background:#7c3aed;color:#fff;border:none}}
-.gen-modal .btn-primary:hover{{background:#6d28d9}}
-.gen-modal .btn-primary:disabled{{opacity:.5;cursor:not-allowed}}
-.gen-modal .btn-cancel{{background:#fff;color:#64748b;border:1px solid #e2e8f0}}
 
 .empty-state{{text-align:center;padding:50px 20px;color:#64748b}}
 .empty-state code{{background:#e2e8f0;padding:2px 7px;border-radius:4px;font-size:12px}}
@@ -720,147 +676,8 @@ function exportApproved(){{
     }}
   }});
   updateStats();
-  checkChatServer();
 }})();
-
-// ==== CHAT ====
-var chatHistory=[];
-var chatServerOnline=false;
-var API_BASE='';  // empty = use relative URLs
-
-function checkChatServer(){{
-  fetch('/api/health').then(r=>r.json()).then(d=>{{
-    if(d.status==='ok'){{chatServerOnline=true;document.getElementById('chatStatus').textContent='🟢 服务在线';document.getElementById('chatStatus').className='chat-server-status online';}}
-  }}).catch(()=>{{
-    // Fallback: try localhost for dev
-    fetch('http://localhost:8765/api/health').then(r=>r.json()).then(d=>{{
-      if(d.status==='ok'){{chatServerOnline=true;API_BASE='http://localhost:8765';document.getElementById('chatStatus').textContent='🟢 本地服务在线';document.getElementById('chatStatus').className='chat-server-status online';}}
-    }}).catch(()=>{{chatServerOnline=false;document.getElementById('chatStatus').textContent='🔴 未启动 (python app.py)';document.getElementById('chatStatus').className='chat-server-status';}});
-  }});
-}}
-
-function toggleChat(){{
-  var panel=document.getElementById('chatPanel');
-  var btn=document.getElementById('chatToggle');
-  panel.classList.toggle('visible');
-  btn.classList.toggle('open');
-  btn.textContent=panel.classList.contains('visible')?'✕':'💬';
-  if(panel.classList.contains('visible'))checkChatServer();
-}}
-
-function sendChat(){{
-  var input=document.getElementById('chatInput');
-  var msg=input.value.trim();
-  if(!msg)return;
-  if(!chatServerOnline){{addChatMsg('assistant','请先启动服务: python3 chat_server.py','error');return;}}
-  input.value='';
-  addChatMsg('user',msg);
-  chatHistory.push({{role:'user',content:msg}});
-
-  var loadId=addChatMsg('assistant','思考中...','loading');
-  fetch(API_BASE+'/api/chat',{{
-    method:'POST',headers:{{'Content-Type':'application/json'}},
-    body:JSON.stringify({{message:msg,history:chatHistory.slice(0,-1)}})
-  }}).then(r=>r.json()).then(d=>{{
-    document.getElementById(loadId).remove();
-    addChatMsg('assistant',d.reply||'[无回复]');
-    chatHistory.push({{role:'assistant',content:d.reply||''}});
-    document.getElementById('chatMessages').scrollTop=document.getElementById('chatMessages').scrollHeight;
-  }}).catch(e=>{{
-    document.getElementById(loadId).remove();
-    addChatMsg('assistant','连接失败，请确认 chat_server.py 已启动','error');
-  }});
-}}
-
-function addChatMsg(role,text,cls){{
-  var id='msg-'+Date.now()+Math.random();
-  var div=document.createElement('div');
-  div.id=id;div.className='chat-msg '+(cls||role);
-  div.textContent=text;
-  document.getElementById('chatMessages').appendChild(div);
-  document.getElementById('chatMessages').scrollTop=document.getElementById('chatMessages').scrollHeight;
-  return id;
-}}
-
-document.getElementById('chatInput').addEventListener('keydown',function(e){{if(e.key==='Enter')sendChat();}});
-
-// ==== BATCH GENERATE ====
-var genContext=null;
-
-function batchGenerate(context){{
-  genContext=context;
-  var topicEl=document.getElementById('genTopic');
-  if(context&&context.methodology){{
-    topicEl.value='基于以下方法论生成用例:\\n论文: '+context.papers+'\\n方法论: '+context.methodology+'\\n启示: '+context.insight;
-    document.getElementById('genCount').value=3;
-  }}else{{
-    topicEl.value='';
-    document.getElementById('genCount').value=5;
-  }}
-  document.getElementById('genModal').classList.add('visible');
-}}
-
-function closeGenModal(){{
-  document.getElementById('genModal').classList.remove('visible');
-}}
-
-function doBatchGenerate(){{
-  if(!chatServerOnline){{alert('AI 服务未连接。请运行 python app.py 或访问 Railway 部署版。');return;}}
-  var btn=document.getElementById('doGenBtn');
-  btn.disabled=true;btn.textContent='生成中...';
-
-  var count=parseInt(document.getElementById('genCount').value)||3;
-  var topic=document.getElementById('genTopic').value.trim();
-  var existingTags=[...new Set(Array.from(document.querySelectorAll('.ecard-tag')).map(e=>e.textContent))];
-
-  fetch(API_BASE+'/api/generate',{{
-    method:'POST',headers:{{'Content-Type':'application/json'}},
-    body:JSON.stringify({{count:count,topic:topic,existing_tags:existingTags.slice(0,30)}})
-  }}).then(r=>r.json()).then(d=>{{
-    btn.disabled=false;btn.textContent='开始生成';
-    if(d.cases&&d.cases.length>0){{
-      var blob=new Blob([JSON.stringify({{generated_at:new Date().toISOString(),count:d.cases.length,cases:d.cases}},null,2)],{{type:'application/json'}});
-      var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-      a.download='generated_cases_'+new Date().toISOString().slice(0,10)+'.json';a.click();
-      alert('已生成 '+d.cases.length+' 条用例，JSON 已下载。\\n请运行 python app.py 并在本地合并到评测集。');
-    }}else{{alert('生成失败，请检查终端输出');}}
-    closeGenModal();
-  }}).catch(e=>{{btn.disabled=false;btn.textContent='开始生成';alert('连接失败: '+e);}});
-}}
 </script>
-
-<!-- CHAT WINDOW -->
-<button class="chat-toggle" id="chatToggle" onclick="toggleChat()">💬</button>
-<div class="chat-panel" id="chatPanel">
-  <div class="chat-header">
-    <span>🤖 AI 研究助手</span>
-    <button onclick="toggleChat()">✕</button>
-  </div>
-  <div class="chat-messages" id="chatMessages">
-    <div class="chat-msg assistant">你好！我是 Auto-Eval 研究助手。可以问我关于论文、评测方法论、车控场景设计等问题。请先运行 <code>python3 chat_server.py</code> 启动服务。</div>
-  </div>
-  <div class="chat-input-area">
-    <input type="text" id="chatInput" placeholder="输入问题... (Enter 发送)">
-    <button onclick="sendChat()">发送</button>
-  </div>
-  <div class="chat-server-status" id="chatStatus">🔴 检测中...</div>
-</div>
-
-<!-- GENERATE MODAL -->
-<div class="gen-modal-overlay" id="genModal">
-  <div class="gen-modal">
-    <h3>🤖 AI 批量生成评测用例</h3>
-    <label>生成数量</label>
-    <input type="number" id="genCount" value="5" min="1" max="20">
-    <label>主题/方向（可选）</label>
-    <textarea id="genTopic" placeholder="例如：记忆跨会话评测、多轮状态追踪、工具歧义消解...&#10;留空则自动识别薄弱维度"></textarea>
-    <p style="font-size:11px;color:#94a3b8">基于 DeepSeek 模型，生成后可下载 JSON 合并到评测集</p>
-    <div class="btn-row">
-      <button class="btn-cancel" onclick="closeGenModal()">取消</button>
-      <button class="btn-primary" id="doGenBtn" onclick="doBatchGenerate()">开始生成</button>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>'''
