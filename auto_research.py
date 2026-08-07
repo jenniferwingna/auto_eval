@@ -454,6 +454,196 @@ CURATED_PAPERS = [
 ]
 
 # ============================================================
+# CHINESE TRANSLATIONS for curated papers
+# ============================================================
+
+CHINESE_TRANSLATIONS = {
+    "bfcl-v4": {
+        "title_zh": "伯克利函数调用排行榜 (BFCL v4)：整体 Agent 评测",
+        "abstract_zh": "BFCL 是函数调用评测的事实标准，从 v1（基于 AST 的单函数匹配）演进到 v4（有状态多轮对话中的整体 Agent 评测）。v4 引入多轮对话评测、相关性检测（知道何时不调用工具）和多语言支持（Python/Java/JavaScript/REST/SQL）。",
+        "findings_zh": [
+            "有状态多轮评测至关重要——单轮匹配会高估实际性能 15-30%",
+            "相关性检测（知道何时不调用工具）与正确工具选择同等重要",
+            "多语言函数调用揭示了单语言测试中不可见的模型弱点",
+            "开源模型差距缩小：最佳开源模型 82.6 vs GPT-5.6 Sol 92",
+        ],
+    },
+    "toolbench-2023": {
+        "title_zh": "ToolBench：大规模真实世界工具学习基准",
+        "abstract_zh": "ToolBench 是一个大规模基准测试，包含 16,464 个真实 REST API，覆盖 49 个类别。使用 DFSDT（深度优先搜索决策树）生成解决方案路径。评测使用 LLM-as-judge 的通过率和胜率指标。",
+        "findings_zh": [
+            "单工具任务已基本解决；多工具编排仍具挑战性",
+            "LLM-as-judge 评测在工具选择上与人类判断高度相关，但参数正确性上不然",
+            "DFSDT 生成的解决方案路径比人工编写的黄金路径覆盖更全面",
+            "工具多样性比工具数量更重要——49 个类别确保了广泛覆盖",
+        ],
+    },
+    "api-bank-2023": {
+        "title_zh": "API-Bank：面向工具增强型 LLM 的综合基准",
+        "abstract_zh": "API-Bank 将工具使用分解为三个子技能：规划（决定调用哪些工具）、检索（从工具池中找到正确工具）和执行（正确参数化）。这种分解方式使失败模式能够被细粒度诊断。",
+        "findings_zh": [
+            "工具使用失败主要由检索错误（选错工具）而非参数错误导致",
+            "规划能力与整体工具使用成功率强相关（r=0.78）",
+            "模型在描述相似但功能不同的工具上表现最差",
+            "三技能分解可实现针对性改进：修复检索而不改动执行",
+        ],
+    },
+    "toolsandbox-2024": {
+        "title_zh": "ToolSandbox：有状态、对话式、交互式的 LLM 工具使用评测基准",
+        "abstract_zh": "ToolSandbox 引入有状态、对话式的工具使用评测，使用'里程碑 DAG'进行轨迹评估。与仅检查最终状态的先前基准不同，ToolSandbox 评估中间步骤和对话流程的质量。",
+        "findings_zh": [
+            "里程碑 DAG 捕获部分正确性——模型可以通过错误方式达到正确状态",
+            "有状态评测揭示了 30% 在无状态基准中'正确'的答案存在问题中间步骤",
+            "对话式工具使用（交织聊天+工具调用）比纯工具调用难度显著更高",
+            "基于里程碑的评分比二元正确/错误更接近人类判断",
+        ],
+    },
+    "traject-bench-2026": {
+        "title_zh": "TRAJECT-Bench：面向 Agent 工具使用的轨迹感知评测基准",
+        "abstract_zh": "TRAJECT-Bench 超越最终答案，评估工具在整个执行轨迹中是否被正确选择、参数化和排序。揭示了'相似工具混淆'和'参数盲选'等仅靠结果评测无法发现的失败模式。",
+        "findings_zh": [
+            "相似工具混淆：描述重叠时模型选错工具（如 shade_curtain_opener vs shade_curtain_switch）",
+            "参数盲选：模型选对工具但参数幻觉或遗漏",
+            "工具排序错误：模型以错误顺序执行有依赖关系的工具",
+            "轨迹分析可实现细粒度反馈以改进模型",
+        ],
+    },
+    "agent-survey-2026": {
+        "title_zh": "LLM Agent 评测综述",
+        "abstract_zh": "首篇针对 LLM Agent 评测方法的全面综述，从五个视角分析该领域：核心 LLM 能力、应用特定基准、通用 Agent、基准维度和评测框架。识别了成本效率、安全性和鲁棒性评估方面的关键差距。",
+        "findings_zh": [
+            "领域从静态基准转向持续更新基准以防止数据污染",
+            "三层评测架构正在形成：最终答案、轨迹和逐轮评估",
+            "LLM-as-judge 占主导地位但存在位置偏见、冗长偏见和非确定性",
+            "多 Agent 评测和企业级约束仍是研究空白",
+        ],
+    },
+    "car-bench-2024": {
+        "title_zh": "CAR-Bench：面向车载语音助手 Agent 的综合基准",
+        "abstract_zh": "CAR-Bench 是车载语音助手领域专用基准，覆盖基础任务、消歧（内部/用户）和幻觉（工具缺失/参数缺失/响应缺失）场景。包含 254 条中文测试用例，含车辆状态、人设和上下文初始化。",
+        "findings_zh": [
+            "车载领域独特地需要同时处理物理状态（速度、座位、温度）和 NLU",
+            "消歧场景（17%）显示模型在提出追问方面存在困难",
+            "幻觉检测（工具/参数缺失）是最难类别，通过率不到 50%",
+            "分区隔离（驾驶员 vs 乘客）是汽车领域独有的安全关键需求",
+        ],
+    },
+    "tau2-bench-2024": {
+        "title_zh": "τ²-bench：面向工具使用 Agent 轨迹的基准",
+        "abstract_zh": "τ²-bench 通过多步轨迹评估工具使用 Agent，强调正确的工具编排（并行 vs 串行、错误处理、计划适应）。引入轨迹级指标，包括工具调用次数效率和计划最优性。",
+        "findings_zh": [
+            "工具编排质量（并行/串行决策）在不同模型间差异达 3 倍",
+            "计划适应（工具失败时改变策略）对大多数模型几乎为零",
+            "高效工具调用（最少调用达成目标）与任务成功率不相关",
+            "错误恢复行为是区分好 Agent 和优秀 Agent 的最强判别器",
+        ],
+    },
+    "metatool-2024": {
+        "title_zh": "MetaTool：通过任务组合促进 LLM 掌握工具",
+        "abstract_zh": "MetaTool 关注何时不使用工具，将相关性检测作为一等评测标准。显示模型在 20-40% 的不相关查询中过度触发工具，强调了评测中负例的重要性。",
+        "findings_zh": [
+            "工具过度触发普遍存在：模型对 20-40% 不需要工具的查询调用工具",
+            "相关性检测准确率在不同模型间差异很大（45-90%）",
+            "在训练中添加显式的'无需工具'示例可将过度触发降低 30%",
+            "评测中的负例至关重要——没有负例，过度触发模型显得比实际更好",
+        ],
+    },
+    "agentbench-2023": {
+        "title_zh": "AgentBench：将 LLM 作为 Agent 进行评测",
+        "abstract_zh": "AgentBench 在 8 个多样化交互环境中评测 LLM（OS、数据库、Web、游戏等），测试长时程推理和多步规划。是首批展示强对话模型可能是弱 Agent 的基准之一。",
+        "findings_zh": [
+            "对话性能是 Agent 性能的弱预测器（r=0.3-0.5）",
+            "长时程规划（5步以上）是所有模型最难的能力",
+            "环境多样性揭示了单领域测试中不可见的模型特定弱点",
+            "开源模型在 Agent 任务上显著落后于闭源模型（差距 20-40%）",
+        ],
+    },
+    "complexfuncbench-2025": {
+        "title_zh": "ComplexFuncBench：面向 LLM 复杂函数调用的基准",
+        "abstract_zh": "ComplexFuncBench 关注复杂函数调用场景，包括嵌套函数调用、跨多个调用的约束满足和动态参数解析。填补了简单单调用基准与完整 Agent 评测之间的空白。",
+        "findings_zh": [
+            "嵌套函数调用（A的输出→B的输入）在所有模型中成功率不到 30%",
+            "跨调用约束满足近乎随机（如'总调整必须为零'）",
+            "动态参数解析（从先前调用中查找值）使性能下降 40%",
+            "约束感知的工具调用仍是一个开放问题",
+        ],
+    },
+    "mcp-agentbench-2025": {
+        "title_zh": "MCP-AgentBench：在模型上下文协议生态系统中评测 Agent",
+        "abstract_zh": "MCP-AgentBench 使用双层评测（基于规则的确定性检查 + LLM-as-judge 定性评估）评测 MCP 生态系统中的 Agent。测试 Agent 从 MCP 服务器发现、选择和组合工具的能力。",
+        "findings_zh": [
+            "双层评测（基于规则 + LLM-judge）平衡了可靠性和覆盖范围",
+            "工具发现（找到正确的 MCP 服务器）是固定工具基准中不存在的新失败模式",
+            "MCP 协议开销增加延迟但实现了跨提供商的工具可组合性",
+            "基于规则的检查捕获 80% 的错误；LLM-judge 处理剩余 20%",
+        ],
+    },
+    "stable-toolbench-2024": {
+        "title_zh": "StableToolBench：面向稳定且可复现的工具学习评测",
+        "abstract_zh": "StableToolBench 解决了工具使用基准中 API 不稳定的根本问题：真实 API 会变更、弃用或消失，导致评测结果不可复现。提出使用模拟稳定 API 服务器作为解决方案。",
+        "findings_zh": [
+            "真实 API 基准在 6 个月内因 API 变更丢失 15-30% 的测试用例",
+            "模拟稳定 API 在 12 个月周期内实现 >95% 的结果可复现性",
+            "API 演化对不同模型影响不同，引入了评测偏见",
+            "稳定评测需要版本化的 API 快照和模拟服务器",
+        ],
+    },
+    "apigen-2024": {
+        "title_zh": "APIGen：面向函数调用合成数据生成的自动化流水线",
+        "abstract_zh": "APIGen 提出了一个自动化流水线，用于生成高质量的函数调用合成数据。使用多阶段生成+过滤+验证流水线，大规模产出多样化、真实的函数调用示例。",
+        "findings_zh": [
+            "自动化数据生成结合严格过滤可匹配人工标注质量",
+            "多阶段生成（生成→验证→过滤→重新生成）比单次通过提升质量 40%",
+            "多样性指标（工具覆盖、参数分布、语言变体）对质量控制至关重要",
+            "合成数据训练的模型在函数调用任务上可匹配或超越人工数据训练的模型",
+        ],
+    },
+    "helm-2023": {
+        "title_zh": "HELM：语言模型的整体评估",
+        "abstract_zh": "HELM 提供全面、标准化的评估框架，覆盖 42 个场景和 7 个指标类别。开创了'场景 × 指标'的评估分类法，并强调评估设计的透明度。",
+        "findings_zh": [
+            "多指标评估揭示了单指标方法不可见的权衡",
+            "场景多样性比场景数量更重要——7 个精心选择的场景优于 30 个窄场景",
+            "标准化评估协议对跨模型可比性至关重要",
+            "评估透明度（开放数据、开放代码、清晰指标）建立对基准结果的信任",
+        ],
+    },
+    "car-mem-bench-2025": {
+        "title_zh": "CarMem：面向车载语音助手长期记忆的基准",
+        "abstract_zh": "CarMem 评估车载助手跨会话存储、检索和应用用户长期偏好的能力。定义了 5 种记忆操作（提取、存储、检索、更新、遗忘）并在多会话场景中测试。",
+        "findings_zh": [
+            "从自然对话中提取记忆是最难的操作（40-60% 成功率）",
+            "偏好冲突（旧 vs 新）在 50% 的情况下被错误处理——模型同时保留而非更新",
+            "多用户记忆隔离对大多数模型几乎是零能力",
+            "会话边界检测（何时存储 vs 遗忘）仍未解决",
+        ],
+    },
+    "code-gen-eval-2024": {
+        "title_zh": "SWE-Bench：语言模型能否解决真实世界 GitHub Issue？",
+        "abstract_zh": "SWE-Bench 在真实 GitHub Issue 上评测 LLM，要求模型理解问题描述、定位相关代码并生成正确补丁。为真实、端到端的 Agent 评测设立了标准。",
+        "findings_zh": [
+            "真实世界任务比合成基准难几个数量级",
+            "端到端评测（Issue→补丁）对衡量实际效用至关重要",
+            "基于测试的验证（单元测试通过）提供了客观、可复现的评分",
+            "最佳模型与平均模型之间的差距在真实世界任务上急剧扩大",
+        ],
+    },
+}
+
+
+def apply_chinese_translations(papers):
+    """Apply Chinese translations to papers that have them."""
+    for paper in papers:
+        pid = paper.get("id", "")
+        if pid in CHINESE_TRANSLATIONS:
+            tr = CHINESE_TRANSLATIONS[pid]
+            for key in ["title_zh", "abstract_zh", "findings_zh"]:
+                if key in tr:
+                    paper[key] = tr[key]
+    return papers
+
+
+# ============================================================
 # API CLIENTS
 # ============================================================
 
@@ -788,7 +978,9 @@ def run_pipeline(use_api=True):
     print(f"   Curated papers: {len(CURATED_PAPERS)}")
 
     all_papers = merge_papers(all_api_papers, CURATED_PAPERS)
+    all_papers = apply_chinese_translations(all_papers)
     print(f"   After merge: {len(all_papers)} unique papers")
+    print(f"   Chinese translations applied: {sum(1 for p in all_papers if p.get('title_zh'))} papers")
 
     # Phase 3: Sort & Organize
     print(f"\n📋 Phase 3: Organizing...")
