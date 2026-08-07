@@ -1,0 +1,47 @@
+name: Daily Research Update
+
+on:
+  schedule:
+    # 每天 UTC 2:00 (北京时间 10:00)
+    - cron: '0 2 * * *'
+  # 允许手动触发
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install openpyxl
+
+      - name: Run auto-research pipeline
+        run: python3 auto_research.py --api
+        continue-on-error: true  # API 调用可能偶发失败，不阻塞后续步骤
+
+      - name: Generate eval cases from insights
+        run: python3 apply_insights.py
+
+      - name: Generate website
+        run: python3 generate_site.py
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "🤖 每日自动研究更新 [skip ci]"
+          file_pattern: 'papers.json insights.json index.html research_eval_cases.json'
+          commit_user_name: 'Auto-Eval Bot'
+          commit_user_email: 'auto-eval-bot@users.noreply.github.com'
+          commit_author: 'Auto-Eval Bot <auto-eval-bot@users.noreply.github.com>'
