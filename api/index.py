@@ -1,14 +1,11 @@
-"""Vercel Serverless — Flask app handling /api/chat and /api/generate"""
-import json, os, re, sys
 from flask import Flask, request, jsonify
+import json, os, re
 
 app = Flask(__name__)
 TOKEN = os.environ.get("DEEPSEEK_TOKEN", "")
 API_URL = "https://api.deepseek.com/v1/chat/completions"
 
-SYSTEM_PROMPT = """你是 Auto-Eval 研究助手，帮助理解和改进车控 Agent 评测集。
-知识领域：LLM Agent 评测框架（BFCL, ToolBench, API-Bank, ToolSandbox, CAR-bench, MetaTool, TRAJECT-Bench 等）、函数调用评测方法论、车载语音助手评测。
-用中文回复，简洁专业。问论文则简述核心方法和发现。问评测设计则给出可操作的方案。"""
+SYSTEM_PROMPT = "你是 Auto-Eval 研究助手，帮助理解和改进车控 Agent 评测集。知识领域：LLM Agent 评测框架（BFCL, ToolBench, API-Bank, ToolSandbox, CAR-bench, MetaTool, TRAJECT-Bench 等）、函数调用评测方法论、车载语音助手评测。用中文简洁回复。"
 
 
 def call_ds(messages, max_tokens=2000):
@@ -16,11 +13,8 @@ def call_ds(messages, max_tokens=2000):
     req = Request(API_URL,
         data=json.dumps({"model": "deepseek-chat", "messages": messages, "max_tokens": max_tokens, "temperature": 0.7}).encode(),
         headers={"Content-Type": "application/json", "Authorization": f"Bearer {TOKEN}"})
-    try:
-        with urlopen(req, timeout=25) as r:
-            return json.loads(r.read())["choices"][0]["message"]["content"]
-    except Exception as e:
-        return f"[API错误: {e}]"
+    with urlopen(req, timeout=25) as r:
+        return json.loads(r.read())["choices"][0]["message"]["content"]
 
 
 @app.route("/api/health")
@@ -30,7 +24,7 @@ def health():
 
 @app.route("/api/chat", methods=["POST"])
 def chat():
-    data = request.get_json() or {}
+    data = request.get_json(silent=True) or {}
     msg = data.get("message", "").strip()
     history = data.get("history", [])
     if not msg:
@@ -41,13 +35,16 @@ def chat():
         messages.append({"role": h.get("role", "user"), "content": h.get("content", "")})
     messages.append({"role": "user", "content": msg})
 
-    reply = call_ds(messages)
+    try:
+        reply = call_ds(messages)
+    except Exception as e:
+        reply = f"[API错误: {e}]"
     return jsonify({"reply": reply})
 
 
 @app.route("/api/generate", methods=["POST"])
 def generate():
-    data = request.get_json() or {}
+    data = request.get_json(silent=True) or {}
     count = data.get("count", 5)
     topic = data.get("topic", "")
     existing_tags = data.get("existing_tags", [])
@@ -63,7 +60,11 @@ def generate():
 ]
 要求：query 中文口语化，覆盖不同子域，正例+负例，断言可自动验证（不要 rubric）。"""
 
-    result = call_ds([{"role": "user", "content": prompt}], max_tokens=4000)
+    try:
+        result = call_ds([{"role": "user", "content": prompt}], max_tokens=4000)
+    except Exception as e:
+        return jsonify({"cases": [], "error": str(e)})
+
     cases = []
     try:
         m = re.search(r"\[.*\]", result, re.DOTALL)
