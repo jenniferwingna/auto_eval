@@ -1,0 +1,97 @@
+{
+  "meta_title": "Cross-Paper Insights for Car-Control Agent Evaluation",
+  "meta_title_zh": "跨论文洞察：车控 Agent 评测的关键方向",
+  "generated_at": "2026-08-07T10:31:57.242270",
+  "total_papers": 17,
+  "cross_cutting_themes": [
+    {
+      "theme": "From Static to Stateful Evaluation",
+      "theme_zh": "从静态到有状态的评测范式转变",
+      "description": "BFCL v4, ToolSandbox, TRAJECT-Bench, and τ²-bench all converge on the same finding: single-turn, stateless evaluation overestimates real-world performance by 15-30%. The field is unanimously moving toward stateful, multi-turn, trajectory-aware evaluation.",
+      "papers": [
+        "bfcl-v4",
+        "toolsandbox-2024",
+        "traject-bench-2026",
+        "tau2-bench-2024"
+      ],
+      "car_control_action": "Our eval set should prioritize multi-turn scenarios (currently 26/207 = 12.5%). Target: 25-30% multi-turn. Add explicit vehicle state tracking across turns in each multi-turn case."
+    },
+    {
+      "theme": "Three-Layer Evaluation Architecture",
+      "theme_zh": "三层评测架构：结果 → 轨迹 → 逐轮",
+      "description": "The Agent Survey (ACL 2026), ToolSandbox, and MCP-AgentBench independently propose three evaluation layers: (1) final-answer/state verification, (2) trajectory/tool-call correctness, (3) per-turn interaction quality. This maps naturally to our action/state/label assertion types.",
+      "papers": [
+        "agent-survey-2026",
+        "toolsandbox-2024",
+        "mcp-agentbench-2025"
+      ],
+      "car_control_action": "Our assertion system (action=layer 1, state=layer 2, label=layer 3) already implements this architecture. Next step: add trajectory-level scoring for hard combo cases using Milestone DAG approach."
+    },
+    {
+      "theme": "Similar Tool Confusion is the Dominant Failure Mode",
+      "theme_zh": "相似工具混淆是最主要的失败模式",
+      "description": "TRAJECT-Bench, API-Bank, and BFCL all identify 'similar tool confusion' as the #1 failure mode: models pick wrong tools when descriptions overlap. This directly validates our L1-TL-09 (工具描述歧义敏感度) tag and our shade_curtain_opener vs shade_curtain_switch case.",
+      "papers": [
+        "traject-bench-2026",
+        "api-bank-2023",
+        "bfcl-v4"
+      ],
+      "car_control_action": "Expand L1-TL-09 from 3 to 8 cases covering more similar-tool pairs: mirror_fold vs mirror_adjust, fragrance_switch vs fragrance_mode, conditioner_temperature vs conditioner_speed."
+    },
+    {
+      "theme": "Negative Examples Are Essential but Under-Provided",
+      "theme_zh": "负例不可或缺但普遍供给不足",
+      "description": "MetaTool shows models over-trigger tools 20-40% of the time, yet most benchmarks have <10% negative cases. Our 15% negative ratio is above average but still below the ideal 20-25% suggested by MetaTool's findings.",
+      "papers": [
+        "metatool-2024",
+        "bfcl-v4",
+        "api-bank-2023"
+      ],
+      "car_control_action": "Increase negative cases from 32 (15%) to ~45 (20%+). Focus on subtle negatives: parameter-legal but semantically wrong commands, tool over-triggering in ambiguous contexts, and cross-domain confusion."
+    },
+    {
+      "theme": "Memory and Personalization Are Critical Gaps",
+      "theme_zh": "记忆与个性化是评测的关键空白",
+      "description": "CarMem, VehicleMemBench, and the Agent Survey all identify long-term memory and personalization as the most under-evaluated capability. Our 22 memory-dependent cases (L1-MM-01~05) are among the first to systematically test this in a car-control context.",
+      "papers": [
+        "car-mem-bench-2025",
+        "agent-survey-2026"
+      ],
+      "car_control_action": "Our memory taxonomy (L1-L5 with L1-MM-01~05) is already best-in-class. Next: design end-to-end multi-session test scenarios where preferences persist across simulated days/weeks."
+    },
+    {
+      "theme": "Reproducibility Requires API Stability",
+      "theme_zh": "可复现性依赖于 API 稳定性",
+      "description": "StableToolBench demonstrates that real API benchmarks degrade 15-30% within 6 months. Our tools_manifest.json (547 tools, versioned) provides the stable API snapshot that StableToolBench recommends.",
+      "papers": [
+        "stable-toolbench-2024",
+        "helm-2023"
+      ],
+      "car_control_action": "Version-lock tools_manifest.json with each eval set release. Add API version metadata to eval_cases.json. Design simulated tool servers for CI/CD reproducibility."
+    }
+  ],
+  "gap_analysis": {
+    "what_we_have": [
+      "Comprehensive car-control taxonomy (48 tags, 207 cases)",
+      "Auto-verifiable assertions (0 rubric, 100% action/state/label)",
+      "5-level memory evaluation (L1-MM-01~05)",
+      "Safety layer with stateful conditions (L3-SF-01~04)",
+      "Versioned tool manifest (547 tools in 10 groups)"
+    ],
+    "what_benchmarks_have_that_we_dont": [
+      "Trajectory-level scoring with Milestones (ToolSandbox approach)",
+      "Cross-session memory persistence testing (CarMem approach)",
+      "Automated query variant generation (APIGen approach)",
+      "Real-time tool execution with state simulation",
+      "Standardized leaderboard with public model rankings",
+      "Multi-language function calling (Python + Java + REST + SQL)"
+    ],
+    "what_we_have_that_benchmarks_dont": [
+      "Vehicle-specific state model (speed, seats, climate, partitions)",
+      "Chinese natural speech with oral noise (14% coverage)",
+      "Explicit memory taxonomy (L1-L5) with extraction/application/update/forget",
+      "Safety-critical driving scenarios (speed-gated, child-lock, distraction)",
+      "Domain-specific tool disambiguation (shade_curtain_opener vs switch)"
+    ]
+  }
+}
