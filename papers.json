@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-12T04:08:56.767164",
-  "total_papers": 22,
+  "generated_at": "2026-08-13T04:13:04.184036",
+  "total_papers": 28,
   "papers": [
     {
       "id": "toolbench-2023",
@@ -632,6 +632,169 @@
     },
     {
       "id": "api-0017",
+      "title": "Automotive Multilingual Fault Diagnosis",
+      "authors": [
+        "John Pavlopoulos",
+        "Alv Romell",
+        "Jacob Curman",
+        "Olof Steinert",
+        "Tony Lindgren",
+        "Markus Borg"
+      ],
+      "year": 2022,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2210.06918v1",
+      "topic": "car_agent",
+      "tags": [
+        "multilingual",
+        "car"
+      ],
+      "citations": 0,
+      "abstract": "Automated fault diagnosis can facilitate diagnostics assistance, speedier troubleshooting, and better-organised logistics. Currently, AI-based prognostics and health management in the automotive industry ignore the textual descriptions of the experienced problems or symptoms. With this study, however, we show that a multilingual pre-trained Transformer can effectively classify the textual claims from a large company with vehicle fleets, despite the task's challenging nature due to the 38 languages and 1,357 classes involved. Overall, we report an accuracy of more than 80% for high-frequency classes and above 60% for above-low-frequency classes, bringing novel evidence that multilingual classification can benefit automotive troubleshooting management.",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0018",
+      "title": "GoNoGo: An Efficient LLM-based Multi-Agent System for Streamlining Automotive Software Release Decision-Making",
+      "authors": [
+        "Arsham Gholamzadeh Khoee",
+        "Yinan Yu",
+        "Robert Feldt",
+        "Andris Freimanis",
+        "Patrick Andersson Rhodin",
+        "Dhasarathy Parthasarathy"
+      ],
+      "year": 2024,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2408.09785v2",
+      "topic": "car_agent",
+      "tags": [
+        "agent",
+        "car"
+      ],
+      "citations": 0,
+      "abstract": "Traditional methods for making software deployment decisions in the automotive industry typically rely on manual analysis of tabular software test data. These methods often lead to higher costs and delays in the software release cycle due to their labor-intensive nature. Large Language Models (LLMs) present a promising solution to these challenges. However, their application generally demands multiple rounds of human-driven prompt engineering, which limits their practical deployment, particularly for industrial end-users who need reliable and efficient results. In this paper, we propose GoNoGo, an LLM agent system designed to streamline automotive software deployment while meeting both functional requirements and practical industrial constraints. Unlike previous systems, GoNoGo is specifically tailored to address domain-specific and risk-sensitive systems. We evaluate GoNoGo's performance across different task difficulties using zero-shot and few-shot examples taken from industrial pra",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0019",
+      "title": "GateLens: A Reasoning-Enhanced LLM Agent for Automotive Software Release Analytics",
+      "authors": [
+        "Arsham Gholamzadeh Khoee",
+        "Shuai Wang",
+        "Robert Feldt",
+        "Dhasarathy Parthasarathy",
+        "Yinan Yu"
+      ],
+      "year": 2025,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2503.21735v4",
+      "topic": "car_agent",
+      "tags": [
+        "agent",
+        "safety",
+        "car"
+      ],
+      "citations": 0,
+      "abstract": "Ensuring reliable data-driven decisions is crucial in domains where analytical accuracy directly impacts safety, compliance, or operational outcomes. Decision support in such domains relies on large tabular datasets, where manual analysis is slow, costly, and error-prone. While Large Language Models (LLMs) offer promising automation potential, they face challenges in analytical reasoning, structured data handling, and ambiguity resolution. This paper introduces GateLens, an LLM-based architecture for reliable analysis of complex tabular data. Its key innovation is the use of Relational Algebra (RA) as a formal intermediate representation between natural-language reasoning and executable code, addressing the reasoning-to-code gap that can arise in direct generation approaches. In our automotive instantiation, GateLens translates natural language queries into RA expressions and generates optimized Python code. Unlike traditional multi-agent or planning-based systems that can be slow, opa",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0020",
+      "title": "Voice-Based Smart Assistant System for Vehicles using RASA",
+      "authors": [
+        "Aditya Paranjape",
+        "Yash Patwardhan",
+        "Vedant Deshpande",
+        "Aniket Darp",
+        "Jayashree Jagdale"
+      ],
+      "year": 2023,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2312.01642v1",
+      "topic": "car_agent",
+      "tags": [
+        "safety",
+        "car",
+        "voice"
+      ],
+      "citations": 0,
+      "abstract": "Conversational AIs, or chatbots, mimic human speech when conversing. Smart assistants facilitate the automation of several tasks that needed human intervention earlier. Because of their accuracy, absence of dependence on human resources, and accessibility around the clock, chatbots can be employed in vehicles too. Due to people's propensity to divert their attention away from the task of driving while engaging in other activities like calling, playing music, navigation, and getting updates on the weather forecast and latest news, road safety has declined and accidents have increased as a result. It would be advantageous to automate these tasks using voice commands rather than carrying them out manually. This paper focuses on the development of a voice-based smart assistance application for vehicles based on the RASA framework. The smart assistant provides functionalities like navigation, communication via calls, getting weather forecasts and the latest news updates, and music that are ",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0021",
+      "title": "FFT: Towards Harmlessness Evaluation and Analysis for LLMs with Factuality, Fairness, Toxicity",
+      "authors": [
+        "Shiyao Cui",
+        "Zhenyu Zhang",
+        "Yilong Chen",
+        "Wenyuan Zhang",
+        "Tianyun Liu",
+        "Siqi Wang",
+        "Tingwen Liu"
+      ],
+      "year": 2023,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2311.18580v2",
+      "topic": "agent_evaluation",
+      "tags": [
+        "benchmark",
+        "evaluation"
+      ],
+      "citations": 0,
+      "abstract": "The widespread of generative artificial intelligence has heightened concerns about the potential harms posed by AI-generated texts, primarily stemming from factoid, unfair, and toxic content. Previous researchers have invested much effort in assessing the harmlessness of generative language models. However, existing benchmarks are struggling in the era of large language models (LLMs), due to the stronger language generation and instruction following capabilities, as well as wider applications. In this paper, we propose FFT, a new benchmark with 2116 elaborated-designed instances, for LLM harmlessness evaluation with factuality, fairness, and toxicity. To investigate the potential harms of LLMs, we evaluate 9 representative LLMs covering various parameter scales, training stages, and creators. Experiments show that the harmlessness of LLMs is still under-satisfactory, and extensive analysis derives some insightful findings that could inspire future research for harmless LLM research.",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0022",
+      "title": "Design, Results and Industry Implications of the World's First Insurance Large Language Model Evaluation Benchmark",
+      "authors": [
+        "Hua Zhou",
+        "Bing Ma",
+        "Yufei Zhang",
+        "Yi Zhao"
+      ],
+      "year": 2025,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2511.07794v1",
+      "topic": "eval_methodology",
+      "tags": [
+        "benchmark",
+        "evaluation",
+        "agent",
+        "safety"
+      ],
+      "citations": 0,
+      "abstract": "This paper comprehensively elaborates on the construction methodology, multi-dimensional evaluation system, and underlying design philosophy of CUFEInse v1.0. Adhering to the principles of \"quantitative-oriented, expert-driven, and multi-validation,\" the benchmark establishes an evaluation framework covering 5 core dimensions, 54 sub-indicators, and 14,430 high-quality questions, encompassing insurance theoretical knowledge, industry understanding, safety and compliance, intelligent agent application, and logical rigor. Based on this benchmark, a comprehensive evaluation was conducted on 11 mainstream large language models. The evaluation results reveal that general-purpose models suffer from common bottlenecks such as weak actuarial capabilities and inadequate compliance adaptation. High-quality domain-specific training demonstrates significant advantages in insurance vertical scenarios but exhibits shortcomings in business adaptation and compliance. The evaluation also accurately ide",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0023",
       "title": "Enhancing Multilingual Speech Recognition through Language Prompt Tuning and Frame-Level Language Adapter",
       "authors": [
         "Song Li",
@@ -657,7 +820,7 @@
       "source": "arxiv"
     },
     {
-      "id": "api-0018",
+      "id": "api-0024",
       "title": "MultiMed: Multilingual Medical Speech Recognition via Attention Encoder Decoder",
       "authors": [
         "Khai Le-Duc",
@@ -689,7 +852,7 @@
       "source": "arxiv"
     },
     {
-      "id": "api-0019",
+      "id": "api-0025",
       "title": "VoiceAgentBench: Are Voice Assistants ready for agentic tasks?",
       "authors": [
         "Dhruv Jain",
@@ -720,7 +883,7 @@
       "source": "arxiv"
     },
     {
-      "id": "api-0020",
+      "id": "api-0026",
       "title": "MSR-86K: An Evolving, Multilingual Corpus with 86,300 Hours of Transcribed Audio for Speech Recognition Research",
       "authors": [
         "Song Li",
@@ -747,7 +910,7 @@
       "source": "arxiv"
     },
     {
-      "id": "api-0021",
+      "id": "api-0027",
       "title": "The Massively Multilingual Natural Language Understanding 2022 (MMNLU-22) Workshop and Competition",
       "authors": [
         "Christopher Hench",
