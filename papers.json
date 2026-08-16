@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-15T02:52:52.482826",
-  "total_papers": 17,
+  "generated_at": "2026-08-16T02:59:21.068543",
+  "total_papers": 36,
   "papers": [
     {
       "id": "toolbench-2023",
@@ -629,6 +629,523 @@
         "MCP 协议开销增加延迟但实现了跨提供商的工具可组合性",
         "基于规则的检查捕获 80% 的错误；LLM-judge 处理剩余 20%"
       ]
+    },
+    {
+      "id": "api-0017",
+      "title": "Evaluation Agent: Efficient and Promptable Evaluation Framework for Visual Generative Models",
+      "authors": [
+        "Fan Zhang",
+        "Shulin Tian",
+        "Ziqi Huang",
+        "Yu Qiao",
+        "Ziwei Liu"
+      ],
+      "year": 2024,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2412.09645v3",
+      "topic": "agent_evaluation",
+      "tags": [
+        "evaluation",
+        "agent"
+      ],
+      "citations": 0,
+      "abstract": "Recent advancements in visual generative models have enabled high-quality image and video generation, opening diverse applications. However, evaluating these models often demands sampling hundreds or thousands of images or videos, making the process computationally expensive, especially for diffusion-based models with inherently slow sampling. Moreover, existing evaluation methods rely on rigid pipelines that overlook specific user needs and provide numerical results without clear explanations. In contrast, humans can quickly form impressions of a model's capabilities by observing only a few samples. To mimic this, we propose the Evaluation Agent framework, which employs human-like strategies for efficient, dynamic, multi-round evaluations using only a few samples per round, while offering detailed, user-tailored analyses. It offers four key advantages: 1) efficiency, 2) promptable evaluation tailored to diverse user needs, 3) explainability beyond single numerical scores, and 4) scala",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0018",
+      "title": "EcoAgent-Bench: Evaluating Economic Decision-Making in Budget-Constrained LLM Agents",
+      "authors": [
+        "Jie Wu",
+        "Ming Gong",
+        "Feixiang Cheng",
+        "Qinqin Zhao"
+      ],
+      "year": 2026,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2608.05519v1",
+      "topic": "agent_evaluation",
+      "tags": [
+        "benchmark",
+        "agent"
+      ],
+      "citations": 0,
+      "abstract": "Agent benchmarks usually measure task completion and treat resource use as an auxiliary statistic. In deployment, however, the choice among a local lookup, broad search, composite research tool, stronger model, or human escalation is part of the task itself. We introduce EcoAgent-Bench, in which every task specifies priced actions and an explicit budget. Its 304 real-derived tasks span five families adapted from GAIA, HotpotQA, and MuSiQue, and test four decisions: avoiding unnecessary escalation, escalating when local evidence is insufficient, selecting a model tier, and stopping on unsupported premises. We evaluate seven LLM agents in tool-API and workspace-CLI settings, together with four oracle scripted controls. Micro-averaged accuracy rewards one-sided policies: always-escalate controls achieve high micro success while failing save-oriented tasks. We therefore also report an economic-consistency score (the worse of accuracy on upgrade-oriented and save-oriented family groups) whi",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0019",
+      "title": "Towards Effective GenAI Multi-Agent Collaboration: Design and Evaluation for Enterprise Applications",
+      "authors": [
+        "Raphael Shu",
+        "Nilaksh Das",
+        "Michelle Yuan",
+        "Monica Sunkara",
+        "Yi Zhang"
+      ],
+      "year": 2024,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2412.05449v1",
+      "topic": "agent_evaluation",
+      "tags": [
+        "benchmark",
+        "evaluation",
+        "agent"
+      ],
+      "citations": 0,
+      "abstract": "AI agents powered by large language models (LLMs) have shown strong capabilities in problem solving. Through combining many intelligent agents, multi-agent collaboration has emerged as a promising approach to tackle complex, multi-faceted problems that exceed the capabilities of single AI agents. However, designing the collaboration protocols and evaluating the effectiveness of these systems remains a significant challenge, especially for enterprise applications. This report addresses these challenges by presenting a comprehensive evaluation of coordination and routing capabilities in a novel multi-agent collaboration framework. We evaluate two key operational modes: (1) a coordination mode enabling complex task completion through parallel communication and payload referencing, and (2) a routing mode for efficient message forwarding between agents. We benchmark on a set of handcrafted scenarios from three enterprise domains, which are publicly released with the report. For coordination",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0020",
+      "title": "ToolRegistry: A Protocol-Agnostic Tool Management Library for Function-Calling LLMs",
+      "authors": [
+        "Peng Ding",
+        "Rick Stevens"
+      ],
+      "year": 2025,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2507.10593v3",
+      "topic": "function_calling",
+      "tags": [
+        "benchmark",
+        "function calling"
+      ],
+      "citations": 0,
+      "abstract": "Every LLM tool call is structurally an RPC -- a function name, JSON arguments, and a serialized result -- yet each protocol (native Python, MCP, OpenAPI, LangChain) is integrated from scratch. We present ToolRegistry, a system that makes this RPC nature explicit: a single Tool object acts as a universal stub regardless of transport, while the registry serves as the RPC client runtime for dispatch, schema generation, and execution. The system ships as three packages -- a core registry, a server exposing tools over MCP and OpenAPI, and a hub of production-ready implementations -- and invokes tools through pluggable thread or process backends. The system now also provides tag-based permission policies, BM25F-powered progressive tool disclosure for large registries, think-augmented function calling, multi-provider schema support (OpenAI, Anthropic, Gemini), declarative JSONC/YAML configuration, and a near-zero-dependency core built on stdlib-only vendored modules. In our benchmarks the lib",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0021",
+      "title": "Retrieval Models Aren't Tool-Savvy: Benchmarking Tool Retrieval for Large Language Models",
+      "authors": [
+        "Zhengliang Shi",
+        "Yuhan Wang",
+        "Lingyong Yan",
+        "Pengjie Ren",
+        "Shuaiqiang Wang",
+        "Dawei Yin",
+        "Zhaochun Ren"
+      ],
+      "year": 2025,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2503.01763v2",
+      "topic": "function_calling",
+      "tags": [
+        "benchmark",
+        "tool use",
+        "agent"
+      ],
+      "citations": 0,
+      "abstract": "Tool learning aims to augment large language models (LLMs) with diverse tools, enabling them to act as agents for solving practical tasks. Due to the limited context length of tool-using LLMs, adopting information retrieval (IR) models to select useful tools from large toolsets is a critical initial step. However, the performance of IR models in tool retrieval tasks remains underexplored and unclear. Most tool-use benchmarks simplify this step by manually pre-annotating a small set of relevant tools for each task, which is far from the real-world scenarios. In this paper, we propose ToolRet, a heterogeneous tool retrieval benchmark comprising 7.6k diverse retrieval tasks, and a corpus of 43k tools, collected from existing datasets. We benchmark six types of models on ToolRet. Surprisingly, even the models with strong performance in conventional IR benchmarks, exhibit poor performance on ToolRet. This low retrieval quality degrades the task pass rate of tool-use LLMs. As a further step,",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0022",
+      "title": "PPTC-R benchmark: Towards Evaluating the Robustness of Large Language Models for PowerPoint Task Completion",
+      "authors": [
+        "Zekai Zhang",
+        "Yiduo Guo",
+        "Yaobo Liang",
+        "Dongyan Zhao",
+        "Nan Duan"
+      ],
+      "year": 2024,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2403.03788v1",
+      "topic": "agent_evaluation",
+      "tags": [
+        "benchmark"
+      ],
+      "citations": 0,
+      "abstract": "The growing dependence on Large Language Models (LLMs) for finishing user instructions necessitates a comprehensive understanding of their robustness to complex task completion in real-world situations. To address this critical need, we propose the PowerPoint Task Completion Robustness benchmark (PPTC-R) to measure LLMs' robustness to the user PPT task instruction and software version. Specifically, we construct adversarial user instructions by attacking user instructions at sentence, semantic, and multi-language levels. To assess the robustness of Language Models to software versions, we vary the number of provided APIs to simulate both the newest version and earlier version settings. Subsequently, we test 3 closed-source and 4 open-source LLMs using a benchmark that incorporates these robustness settings, aiming to evaluate how deviations impact LLMs' API calls for task completion. We find that GPT-4 exhibits the highest performance and strong robustness in our benchmark, particularl",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0023",
+      "title": "Beyond Function Calling: Benchmarking Tool-Using Agents under Tool-Environment Unreliability",
+      "authors": [
+        "Yang Tian",
+        "Zhengpeng Shi",
+        "Yu Zhou",
+        "Bo Zhao"
+      ],
+      "year": 2026,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2606.25819v2",
+      "topic": "function_calling",
+      "tags": [
+        "benchmark",
+        "evaluation",
+        "function calling",
+        "tool use",
+        "agent"
+      ],
+      "citations": 0,
+      "abstract": "Large language models are increasingly deployed as agents that solve tasks by interacting with external tool environments. Although recent tool-use benchmarks increasingly cover complex task settings, they still largely assume clean, stable, and trustworthy tool environments, leaving tool-environment unreliability insufficiently examined. We introduce ToolBench-X, a benchmark for evaluating agents under recoverable reliability hazards. ToolBench-X contains executable multi-step tasks across diverse domains and sequential, parallel, and mixed workflows, each paired with deterministic tools and a canonical final answer for automatic evaluation. Starting from clean tool environments, ToolBench-X injects five structured hazard types: Specification Drift, Invocation Error, Execution Failure, Output Drift, and Cross-source Conflict. Crucially, each injected instance remains solvable through at least one valid recovery path, such as retrying, fallback, verification, or cross-checking. Experim",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0024",
+      "title": "When Users Are Happy but Agents Are Wrong: Multi-Dimensional Evaluation of Tool-Augmented Dialogue",
+      "authors": [
+        "Tanya Shourya",
+        "Yingfan Wang",
+        "Zhaoyi Joey Hou",
+        "Shamik Roy",
+        "Vinayshekhar Bannihatti Kumar",
+        "Rashmi Gangadharaiah"
+      ],
+      "year": 2025,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2510.19186v3",
+      "topic": "agent_evaluation",
+      "tags": [
+        "benchmark",
+        "evaluation",
+        "agent",
+        "multi-turn"
+      ],
+      "citations": 0,
+      "abstract": "Evaluating conversational AI systems that use external tools is challenging, as errors can arise from complex interactions among user, agent, and tools. While existing evaluation methods assess either user satisfaction or agents' tool-calling capabilities, they fail to capture critical errors in multi-turn tool-augmented dialogues-such as when agents misinterpret tool results yet appear satisfactory to users. We introduce TRACE, a benchmark of systematically synthesized tool-augmented conversations covering diverse error cases. Evaluation with state-of-the-art conversation evaluation frameworks reveals that all approaches remain far from ideal performance, demonstrating the fundamental difficulty of this benchmark.",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0025",
+      "title": "Automotive Multilingual Fault Diagnosis",
+      "authors": [
+        "John Pavlopoulos",
+        "Alv Romell",
+        "Jacob Curman",
+        "Olof Steinert",
+        "Tony Lindgren",
+        "Markus Borg"
+      ],
+      "year": 2022,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2210.06918v1",
+      "topic": "car_agent",
+      "tags": [
+        "multilingual",
+        "car"
+      ],
+      "citations": 0,
+      "abstract": "Automated fault diagnosis can facilitate diagnostics assistance, speedier troubleshooting, and better-organised logistics. Currently, AI-based prognostics and health management in the automotive industry ignore the textual descriptions of the experienced problems or symptoms. With this study, however, we show that a multilingual pre-trained Transformer can effectively classify the textual claims from a large company with vehicle fleets, despite the task's challenging nature due to the 38 languages and 1,357 classes involved. Overall, we report an accuracy of more than 80% for high-frequency classes and above 60% for above-low-frequency classes, bringing novel evidence that multilingual classification can benefit automotive troubleshooting management.",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0026",
+      "title": "GoNoGo: An Efficient LLM-based Multi-Agent System for Streamlining Automotive Software Release Decision-Making",
+      "authors": [
+        "Arsham Gholamzadeh Khoee",
+        "Yinan Yu",
+        "Robert Feldt",
+        "Andris Freimanis",
+        "Patrick Andersson Rhodin",
+        "Dhasarathy Parthasarathy"
+      ],
+      "year": 2024,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2408.09785v2",
+      "topic": "car_agent",
+      "tags": [
+        "agent",
+        "car"
+      ],
+      "citations": 0,
+      "abstract": "Traditional methods for making software deployment decisions in the automotive industry typically rely on manual analysis of tabular software test data. These methods often lead to higher costs and delays in the software release cycle due to their labor-intensive nature. Large Language Models (LLMs) present a promising solution to these challenges. However, their application generally demands multiple rounds of human-driven prompt engineering, which limits their practical deployment, particularly for industrial end-users who need reliable and efficient results. In this paper, we propose GoNoGo, an LLM agent system designed to streamline automotive software deployment while meeting both functional requirements and practical industrial constraints. Unlike previous systems, GoNoGo is specifically tailored to address domain-specific and risk-sensitive systems. We evaluate GoNoGo's performance across different task difficulties using zero-shot and few-shot examples taken from industrial pra",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0027",
+      "title": "GateLens: A Reasoning-Enhanced LLM Agent for Automotive Software Release Analytics",
+      "authors": [
+        "Arsham Gholamzadeh Khoee",
+        "Shuai Wang",
+        "Robert Feldt",
+        "Dhasarathy Parthasarathy",
+        "Yinan Yu"
+      ],
+      "year": 2025,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2503.21735v4",
+      "topic": "car_agent",
+      "tags": [
+        "agent",
+        "safety",
+        "car"
+      ],
+      "citations": 0,
+      "abstract": "Ensuring reliable data-driven decisions is crucial in domains where analytical accuracy directly impacts safety, compliance, or operational outcomes. Decision support in such domains relies on large tabular datasets, where manual analysis is slow, costly, and error-prone. While Large Language Models (LLMs) offer promising automation potential, they face challenges in analytical reasoning, structured data handling, and ambiguity resolution. This paper introduces GateLens, an LLM-based architecture for reliable analysis of complex tabular data. Its key innovation is the use of Relational Algebra (RA) as a formal intermediate representation between natural-language reasoning and executable code, addressing the reasoning-to-code gap that can arise in direct generation approaches. In our automotive instantiation, GateLens translates natural language queries into RA expressions and generates optimized Python code. Unlike traditional multi-agent or planning-based systems that can be slow, opa",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0028",
+      "title": "Voice-Based Smart Assistant System for Vehicles using RASA",
+      "authors": [
+        "Aditya Paranjape",
+        "Yash Patwardhan",
+        "Vedant Deshpande",
+        "Aniket Darp",
+        "Jayashree Jagdale"
+      ],
+      "year": 2023,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2312.01642v1",
+      "topic": "car_agent",
+      "tags": [
+        "safety",
+        "car",
+        "voice"
+      ],
+      "citations": 0,
+      "abstract": "Conversational AIs, or chatbots, mimic human speech when conversing. Smart assistants facilitate the automation of several tasks that needed human intervention earlier. Because of their accuracy, absence of dependence on human resources, and accessibility around the clock, chatbots can be employed in vehicles too. Due to people's propensity to divert their attention away from the task of driving while engaging in other activities like calling, playing music, navigation, and getting updates on the weather forecast and latest news, road safety has declined and accidents have increased as a result. It would be advantageous to automate these tasks using voice commands rather than carrying them out manually. This paper focuses on the development of a voice-based smart assistance application for vehicles based on the RASA framework. The smart assistant provides functionalities like navigation, communication via calls, getting weather forecasts and the latest news updates, and music that are ",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0029",
+      "title": "FFT: Towards Harmlessness Evaluation and Analysis for LLMs with Factuality, Fairness, Toxicity",
+      "authors": [
+        "Shiyao Cui",
+        "Zhenyu Zhang",
+        "Yilong Chen",
+        "Wenyuan Zhang",
+        "Tianyun Liu",
+        "Siqi Wang",
+        "Tingwen Liu"
+      ],
+      "year": 2023,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2311.18580v2",
+      "topic": "agent_evaluation",
+      "tags": [
+        "benchmark",
+        "evaluation"
+      ],
+      "citations": 0,
+      "abstract": "The widespread of generative artificial intelligence has heightened concerns about the potential harms posed by AI-generated texts, primarily stemming from factoid, unfair, and toxic content. Previous researchers have invested much effort in assessing the harmlessness of generative language models. However, existing benchmarks are struggling in the era of large language models (LLMs), due to the stronger language generation and instruction following capabilities, as well as wider applications. In this paper, we propose FFT, a new benchmark with 2116 elaborated-designed instances, for LLM harmlessness evaluation with factuality, fairness, and toxicity. To investigate the potential harms of LLMs, we evaluate 9 representative LLMs covering various parameter scales, training stages, and creators. Experiments show that the harmlessness of LLMs is still under-satisfactory, and extensive analysis derives some insightful findings that could inspire future research for harmless LLM research.",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0030",
+      "title": "Design, Results and Industry Implications of the World's First Insurance Large Language Model Evaluation Benchmark",
+      "authors": [
+        "Hua Zhou",
+        "Bing Ma",
+        "Yufei Zhang",
+        "Yi Zhao"
+      ],
+      "year": 2025,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2511.07794v1",
+      "topic": "eval_methodology",
+      "tags": [
+        "benchmark",
+        "evaluation",
+        "agent",
+        "safety"
+      ],
+      "citations": 0,
+      "abstract": "This paper comprehensively elaborates on the construction methodology, multi-dimensional evaluation system, and underlying design philosophy of CUFEInse v1.0. Adhering to the principles of \"quantitative-oriented, expert-driven, and multi-validation,\" the benchmark establishes an evaluation framework covering 5 core dimensions, 54 sub-indicators, and 14,430 high-quality questions, encompassing insurance theoretical knowledge, industry understanding, safety and compliance, intelligent agent application, and logical rigor. Based on this benchmark, a comprehensive evaluation was conducted on 11 mainstream large language models. The evaluation results reveal that general-purpose models suffer from common bottlenecks such as weak actuarial capabilities and inadequate compliance adaptation. High-quality domain-specific training demonstrates significant advantages in insurance vertical scenarios but exhibits shortcomings in business adaptation and compliance. The evaluation also accurately ide",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0031",
+      "title": "Enhancing Multilingual Speech Recognition through Language Prompt Tuning and Frame-Level Language Adapter",
+      "authors": [
+        "Song Li",
+        "Yongbin You",
+        "Xuezhi Wang",
+        "Ke Ding",
+        "Guanglu Wan"
+      ],
+      "year": 2023,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2309.09443v2",
+      "topic": "chinese_agent",
+      "tags": [
+        "multilingual",
+        "voice"
+      ],
+      "citations": 0,
+      "abstract": "Multilingual intelligent assistants, such as ChatGPT, have recently gained popularity. To further expand the applications of multilingual artificial intelligence assistants and facilitate international communication, it is essential to enhance the performance of multilingual speech recognition, which is a crucial component of speech interaction. In this paper, we propose two simple and parameter-efficient methods: language prompt tuning and frame-level language adapter, to respectively enhance language-configurable and language-agnostic multilingual speech recognition. Additionally, we explore the feasibility of integrating these two approaches using parameter-efficient fine-tuning methods. Our experiments demonstrate significant performance improvements across seven languages using our proposed methods.",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0032",
+      "title": "MultiMed: Multilingual Medical Speech Recognition via Attention Encoder Decoder",
+      "authors": [
+        "Khai Le-Duc",
+        "Phuc Phan",
+        "Tan-Hanh Pham",
+        "Bach Phan Tat",
+        "Minh-Huong Ngo",
+        "Chris Ngo",
+        "Thanh Nguyen-Tang",
+        "Truong-Son Hy"
+      ],
+      "year": 2024,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2409.14074v3",
+      "topic": "car_agent",
+      "tags": [
+        "benchmark",
+        "Chinese",
+        "multilingual",
+        "car",
+        "voice"
+      ],
+      "citations": 0,
+      "abstract": "Multilingual automatic speech recognition (ASR) in the medical domain serves as a foundational task for various downstream applications such as speech translation, spoken language understanding, and voice-activated assistants. This technology improves patient care by enabling efficient communication across language barriers, alleviating specialized workforce shortages, and facilitating improved diagnosis and treatment, particularly during pandemics. In this work, we introduce MultiMed, the first multilingual medical ASR dataset, along with the first collection of small-to-large end-to-end medical ASR models, spanning five languages: Vietnamese, English, German, French, and Mandarin Chinese. To our best knowledge, MultiMed stands as the world's largest medical ASR dataset across all major benchmarks: total duration, number of recording conditions, number of accents, and number of speaking roles. Furthermore, we present the first multilinguality study for medical ASR, which includes repr",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0033",
+      "title": "VoiceAgentBench: Are Voice Assistants ready for agentic tasks?",
+      "authors": [
+        "Dhruv Jain",
+        "Harshit Shukla",
+        "Gautam Rajeev",
+        "Ashish Kulkarni",
+        "Chandra Khatri",
+        "Shubham Agarwal"
+      ],
+      "year": 2025,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2510.07978v3",
+      "topic": "agent_evaluation",
+      "tags": [
+        "benchmark",
+        "evaluation",
+        "agent",
+        "multi-turn",
+        "safety",
+        "voice"
+      ],
+      "citations": 0,
+      "abstract": "Large scale Speech Language Models have enabled voice assistants capable of understanding natural spoken queries and performing complex tasks. However, existing speech benchmarks largely focus on isolated capabilities such as transcription or question answering and do not systematically evaluate agentic behavior or adversarial robustness. To address this, we introduce VoiceAgentBench, a comprehensive benchmark for evaluating SpeechLMs in realistic spoken agentic settings, comprising 6,000+ synthetic spoken queries spanning single-tool invocations, multi-tool workflows, multi-turn dialogue, and safety evaluations across English and six Indic languages. To ensure speaker diversity, we further simulate speaker variability using a novel sampling strategy that selects audios for TTS voice conversion based on speaker embeddings to maximize acoustic diversity. Our evaluation measures tool selection accuracy, structural consistency, and the correctness of tool invocations, including adversaria",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0034",
+      "title": "MSR-86K: An Evolving, Multilingual Corpus with 86,300 Hours of Transcribed Audio for Speech Recognition Research",
+      "authors": [
+        "Song Li",
+        "Yongbin You",
+        "Xuezhi Wang",
+        "Zhengkun Tian",
+        "Ke Ding",
+        "Guanglu Wan"
+      ],
+      "year": 2024,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2406.18301v1",
+      "topic": "chinese_agent",
+      "tags": [
+        "multilingual",
+        "voice"
+      ],
+      "citations": 0,
+      "abstract": "Recently, multilingual artificial intelligence assistants, exemplified by ChatGPT, have gained immense popularity. As a crucial gateway to human-computer interaction, multilingual automatic speech recognition (ASR) has also garnered significant attention, as evidenced by systems like Whisper. However, the proprietary nature of the training data has impeded researchers' efforts to study multilingual ASR. This paper introduces MSR-86K, an evolving, large-scale multilingual corpus for speech recognition research. The corpus is derived from publicly accessible videos on YouTube, comprising 15 languages and a total of 86,300 hours of transcribed ASR data. We also introduce how to use the MSR-86K corpus and other open-source corpora to train a robust multilingual ASR model that is competitive with Whisper. MSR-86K will be publicly released on HuggingFace, and we believe that such a large corpus will pave new avenues for research in multilingual ASR.",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0035",
+      "title": "The Massively Multilingual Natural Language Understanding 2022 (MMNLU-22) Workshop and Competition",
+      "authors": [
+        "Christopher Hench",
+        "Charith Peris",
+        "Jack FitzGerald",
+        "Kay Rottmann"
+      ],
+      "year": 2022,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2212.06346v1",
+      "topic": "chinese_agent",
+      "tags": [
+        "evaluation",
+        "multilingual",
+        "voice"
+      ],
+      "citations": 0,
+      "abstract": "Despite recent progress in Natural Language Understanding (NLU), the creation of multilingual NLU systems remains a challenge. It is common to have NLU systems limited to a subset of languages due to lack of available data. They also often vary widely in performance. We launch a three-phase approach to address the limitations in NLU and help propel NLU technology to new heights. We release a 52 language dataset called the Multilingual Amazon SLU resource package (SLURP) for Slot-filling, Intent classification, and Virtual assistant Evaluation, or MASSIVE, in an effort to address parallel data availability for voice assistants. We organize the Massively Multilingual NLU 2022 Challenge to provide a competitive environment and push the state-of-the art in the transferability of models into other languages. Finally, we host the first Massively Multilingual NLU workshop which brings these components together. The MMNLU workshop seeks to advance the science behind multilingual NLU by providi",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
     }
   ]
 }
