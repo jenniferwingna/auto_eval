@@ -211,7 +211,7 @@ footer{background:#0f172a;border-top:1px solid #1e293b;padding:16px;text-align:c
   <div class="fbar">
     <input type="text" placeholder="🔍 搜索论文标题/作者/摘要..." id="searchBox" oninput="filterPapers()">
     <button class="tbtn active" data-topic="all" onclick="filterTopic('all',this)">全部<span class="tcnt">36</span></button>
-    <button class="tbtn" data-topic="agent_evaluation" style="--tc:#3b82f6" onclick="filterTopic('agent_evaluation',this)">Agent 评测框架<span class="tcnt">12</span></button><button class="tbtn" data-topic="function_calling" style="--tc:#10b981" onclick="filterTopic('function_calling',this)">函数调用评测<span class="tcnt">10</span></button><button class="tbtn" data-topic="car_agent" style="--tc:#f59e0b" onclick="filterTopic('car_agent',this)">车载 Agent<span class="tcnt">7</span></button><button class="tbtn" data-topic="eval_methodology" style="--tc:#8b5cf6" onclick="filterTopic('eval_methodology',this)">评测方法论<span class="tcnt">4</span></button><button class="tbtn" data-topic="chinese_agent" style="--tc:#ef4444" onclick="filterTopic('chinese_agent',this)">中文 Agent<span class="tcnt">3</span></button>
+    <button class="tbtn" data-topic="agent_evaluation" style="--tc:#3b82f6" onclick="filterTopic('agent_evaluation',this)">Agent 评测框架<span class="tcnt">11</span></button><button class="tbtn" data-topic="function_calling" style="--tc:#10b981" onclick="filterTopic('function_calling',this)">函数调用评测<span class="tcnt">10</span></button><button class="tbtn" data-topic="car_agent" style="--tc:#f59e0b" onclick="filterTopic('car_agent',this)">车载 Agent<span class="tcnt">7</span></button><button class="tbtn" data-topic="eval_methodology" style="--tc:#8b5cf6" onclick="filterTopic('eval_methodology',this)">评测方法论<span class="tcnt">5</span></button><button class="tbtn" data-topic="chinese_agent" style="--tc:#ef4444" onclick="filterTopic('chinese_agent',this)">中文 Agent<span class="tcnt">3</span></button>
     <select onchange="sortPapers(this.value)" style="padding:5px 10px;border:1px solid #e2e8f0;border-radius:8px;font-size:12px">
       <option value="relevance">按车控相关度</option>
       <option value="citations">按引用数</option>
@@ -745,19 +745,19 @@ footer{background:#0f172a;border-top:1px solid #1e293b;padding:16px;text-align:c
             </div>
           </div>
         </div>
-        <div class="pcard" data-topic="function_calling" data-year="2025" data-score="0" id="paper-api-0021">
+        <div class="pcard" data-topic="eval_methodology" data-year="2026" data-score="0" id="paper-api-0021">
           <div class="pcard-top">
-            <span class="pcard-topic" style="background:#10b981">函数调用评测</span>
+            <span class="pcard-topic" style="background:#8b5cf6">评测方法论</span>
             
-            <span class="pcard-year">2025</span>
+            <span class="pcard-year">2026</span>
             
             <button class="pcard-expand" onclick="togglePaperDetail('api-0021')" title="展开中文详情">📖</button>
           </div>
-          <h3 class="pcard-title"><a href="http://arxiv.org/abs/2503.01763v2" target="_blank">Retrieval Models Aren't Tool-Savvy: Benchmarking Tool Retrieval for Large Language Models</a></h3>
+          <h3 class="pcard-title"><a href="http://arxiv.org/abs/2609.00949v1" target="_blank">Calibration is the Bottleneck: An Action-Class Diagnostic of Multi-Turn Tool-Calling</a></h3>
           
-          <p class="pcard-auth">Zhengliang Shi, Yuhan Wang, Lingyong Yan, Pengjie Ren 等</p>
-          <p class="pcard-abs">Tool learning aims to augment large language models (LLMs) with diverse tools, enabling them to act as agents for solving practical tasks. Due to the limited context length of tool-using LLMs, adopting information retrieval (IR) models to select useful tools from large toolsets is a critical initial...</p>
-          <div class="pcard-tags"><span class="tag">benchmark</span><span class="tag">tool use</span><span class="tag">agent</span></div>
+          <p class="pcard-auth">Kangjia Zhao, Jiajun Li, Haozhan Shen, Wei Chow 等</p>
+          <p class="pcard-abs">Multi-turn tool calling is a core evaluation scenario for large language model (LLM) agents. On public tool-calling benchmarks, open-weight models now approach or even surpass closed-source frontier models in aggregate accuracy. However, this metric averages over many different multi-turn situations...</p>
+          <div class="pcard-tags"><span class="tag">benchmark</span><span class="tag">evaluation</span><span class="tag">agent</span><span class="tag">multi-turn</span></div>
           
 
           <div class="pcard-detail" id="detail-api-0021" style="display:none">
@@ -770,19 +770,19 @@ footer{background:#0f172a;border-top:1px solid #1e293b;padding:16px;text-align:c
             </div>
           </div>
         </div>
-        <div class="pcard" data-topic="agent_evaluation" data-year="2024" data-score="0" id="paper-api-0022">
+        <div class="pcard" data-topic="function_calling" data-year="2025" data-score="0" id="paper-api-0022">
           <div class="pcard-top">
-            <span class="pcard-topic" style="background:#3b82f6">Agent 评测框架</span>
+            <span class="pcard-topic" style="background:#10b981">函数调用评测</span>
             
-            <span class="pcard-year">2024</span>
+            <span class="pcard-year">2025</span>
             
             <button class="pcard-expand" onclick="togglePaperDetail('api-0022')" title="展开中文详情">📖</button>
           </div>
-          <h3 class="pcard-title"><a href="http://arxiv.org/abs/2403.03788v1" target="_blank">PPTC-R benchmark: Towards Evaluating the Robustness of Large Language Models for PowerPoint Task Completion</a></h3>
+          <h3 class="pcard-title"><a href="http://arxiv.org/abs/2503.01763v2" target="_blank">Retrieval Models Aren't Tool-Savvy: Benchmarking Tool Retrieval for Large Language Models</a></h3>
           
-          <p class="pcard-auth">Zekai Zhang, Yiduo Guo, Yaobo Liang, Dongyan Zhao 等</p>
-          <p class="pcard-abs">The growing dependence on Large Language Models (LLMs) for finishing user instructions necessitates a comprehensive understanding of their robustness to complex task completion in real-world situations. To address this critical need, we propose the PowerPoint Task Completion Robustness benchmark (PP...</p>
-          <div class="pcard-tags"><span class="tag">benchmark</span></div>
+          <p class="pcard-auth">Zhengliang Shi, Yuhan Wang, Lingyong Yan, Pengjie Ren 等</p>
+          <p class="pcard-abs">Tool learning aims to augment large language models (LLMs) with diverse tools, enabling them to act as agents for solving practical tasks. Due to the limited context length of tool-using LLMs, adopting information retrieval (IR) models to select useful tools from large toolsets is a critical initial...</p>
+          <div class="pcard-tags"><span class="tag">benchmark</span><span class="tag">tool use</span><span class="tag">agent</span></div>
           
 
           <div class="pcard-detail" id="detail-api-0022" style="display:none">
@@ -795,19 +795,19 @@ footer{background:#0f172a;border-top:1px solid #1e293b;padding:16px;text-align:c
             </div>
           </div>
         </div>
-        <div class="pcard" data-topic="function_calling" data-year="2026" data-score="0" id="paper-api-0023">
+        <div class="pcard" data-topic="agent_evaluation" data-year="2024" data-score="0" id="paper-api-0023">
           <div class="pcard-top">
-            <span class="pcard-topic" style="background:#10b981">函数调用评测</span>
+            <span class="pcard-topic" style="background:#3b82f6">Agent 评测框架</span>
             
-            <span class="pcard-year">2026</span>
+            <span class="pcard-year">2024</span>
             
             <button class="pcard-expand" onclick="togglePaperDetail('api-0023')" title="展开中文详情">📖</button>
           </div>
-          <h3 class="pcard-title"><a href="http://arxiv.org/abs/2606.25819v2" target="_blank">Beyond Function Calling: Benchmarking Tool-Using Agents under Tool-Environment Unreliability</a></h3>
+          <h3 class="pcard-title"><a href="http://arxiv.org/abs/2403.03788v1" target="_blank">PPTC-R benchmark: Towards Evaluating the Robustness of Large Language Models for PowerPoint Task Completion</a></h3>
           
-          <p class="pcard-auth">Yang Tian, Zhengpeng Shi, Yu Zhou, Bo Zhao</p>
-          <p class="pcard-abs">Large language models are increasingly deployed as agents that solve tasks by interacting with external tool environments. Although recent tool-use benchmarks increasingly cover complex task settings, they still largely assume clean, stable, and trustworthy tool environments, leaving tool-environmen...</p>
-          <div class="pcard-tags"><span class="tag">benchmark</span><span class="tag">evaluation</span><span class="tag">function calling</span><span class="tag">tool use</span><span class="tag">agent</span></div>
+          <p class="pcard-auth">Zekai Zhang, Yiduo Guo, Yaobo Liang, Dongyan Zhao 等</p>
+          <p class="pcard-abs">The growing dependence on Large Language Models (LLMs) for finishing user instructions necessitates a comprehensive understanding of their robustness to complex task completion in real-world situations. To address this critical need, we propose the PowerPoint Task Completion Robustness benchmark (PP...</p>
+          <div class="pcard-tags"><span class="tag">benchmark</span></div>
           
 
           <div class="pcard-detail" id="detail-api-0023" style="display:none">
@@ -820,19 +820,19 @@ footer{background:#0f172a;border-top:1px solid #1e293b;padding:16px;text-align:c
             </div>
           </div>
         </div>
-        <div class="pcard" data-topic="agent_evaluation" data-year="2025" data-score="0" id="paper-api-0024">
+        <div class="pcard" data-topic="function_calling" data-year="2026" data-score="0" id="paper-api-0024">
           <div class="pcard-top">
-            <span class="pcard-topic" style="background:#3b82f6">Agent 评测框架</span>
+            <span class="pcard-topic" style="background:#10b981">函数调用评测</span>
             
-            <span class="pcard-year">2025</span>
+            <span class="pcard-year">2026</span>
             
             <button class="pcard-expand" onclick="togglePaperDetail('api-0024')" title="展开中文详情">📖</button>
           </div>
-          <h3 class="pcard-title"><a href="http://arxiv.org/abs/2510.19186v3" target="_blank">When Users Are Happy but Agents Are Wrong: Multi-Dimensional Evaluation of Tool-Augmented Dialogue</a></h3>
+          <h3 class="pcard-title"><a href="http://arxiv.org/abs/2606.25819v2" target="_blank">Beyond Function Calling: Benchmarking Tool-Using Agents under Tool-Environment Unreliability</a></h3>
           
-          <p class="pcard-auth">Tanya Shourya, Yingfan Wang, Zhaoyi Joey Hou, Shamik Roy 等</p>
-          <p class="pcard-abs">Evaluating conversational AI systems that use external tools is challenging, as errors can arise from complex interactions among user, agent, and tools. While existing evaluation methods assess either user satisfaction or agents' tool-calling capabilities, they fail to capture critical errors in mul...</p>
-          <div class="pcard-tags"><span class="tag">benchmark</span><span class="tag">evaluation</span><span class="tag">agent</span><span class="tag">multi-turn</span></div>
+          <p class="pcard-auth">Yang Tian, Zhengpeng Shi, Yu Zhou, Bo Zhao</p>
+          <p class="pcard-abs">Large language models are increasingly deployed as agents that solve tasks by interacting with external tool environments. Although recent tool-use benchmarks increasingly cover complex task settings, they still largely assume clean, stable, and trustworthy tool environments, leaving tool-environmen...</p>
+          <div class="pcard-tags"><span class="tag">benchmark</span><span class="tag">evaluation</span><span class="tag">function calling</span><span class="tag">tool use</span><span class="tag">agent</span></div>
           
 
           <div class="pcard-detail" id="detail-api-0024" style="display:none">
@@ -1911,7 +1911,7 @@ footer{background:#0f172a;border-top:1px solid #1e293b;padding:16px;text-align:c
   <div class="about-inner">
     <h2>ℹ️ 关于 Auto-Eval Research</h2>
     <p>自动化评测研究流水线：多源检索 → 去重合并 → 结构化摘要 → 跨论文洞察 → 车控映射 → <b>评测集生成</b>。</p>
-    <p style="margin-top:6px"><b>数据源:</b> Semantic Scholar API, arXiv API · <b>每日更新:</b> GitHub Actions 每天 UTC 2:00 自动运行 · <b>更新时间:</b> 2026-09-01 07:20 · <b>代码:</b> <a href="https://github.com/jenniferwingna/auto_eval" target="_blank">GitHub</a></p>
+    <p style="margin-top:6px"><b>数据源:</b> Semantic Scholar API, arXiv API · <b>每日更新:</b> GitHub Actions 每天 UTC 2:00 自动运行 · <b>更新时间:</b> 2026-09-02 06:51 · <b>代码:</b> <a href="https://github.com/jenniferwingna/auto_eval" target="_blank">GitHub</a></p>
   </div>
 </div>
 
