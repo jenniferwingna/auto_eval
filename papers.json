@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-29T07:55:52.004138",
-  "total_papers": 36,
+  "generated_at": "2026-09-30T08:03:59.313739",
+  "total_papers": 35,
   "papers": [
     {
       "id": "toolbench-2023",
@@ -1117,32 +1117,6 @@
       ],
       "citations": 0,
       "abstract": "Recently, multilingual artificial intelligence assistants, exemplified by ChatGPT, have gained immense popularity. As a crucial gateway to human-computer interaction, multilingual automatic speech recognition (ASR) has also garnered significant attention, as evidenced by systems like Whisper. However, the proprietary nature of the training data has impeded researchers' efforts to study multilingual ASR. This paper introduces MSR-86K, an evolving, large-scale multilingual corpus for speech recognition research. The corpus is derived from publicly accessible videos on YouTube, comprising 15 languages and a total of 86,300 hours of transcribed ASR data. We also introduce how to use the MSR-86K corpus and other open-source corpora to train a robust multilingual ASR model that is competitive with Whisper. MSR-86K will be publicly released on HuggingFace, and we believe that such a large corpus will pave new avenues for research in multilingual ASR.",
-      "key_findings": [],
-      "methodology": "",
-      "car_control_insight": "",
-      "car_control_score": 0,
-      "source": "arxiv"
-    },
-    {
-      "id": "api-0035",
-      "title": "The Massively Multilingual Natural Language Understanding 2022 (MMNLU-22) Workshop and Competition",
-      "authors": [
-        "Christopher Hench",
-        "Charith Peris",
-        "Jack FitzGerald",
-        "Kay Rottmann"
-      ],
-      "year": 2022,
-      "venue": "",
-      "url": "http://arxiv.org/abs/2212.06346v1",
-      "topic": "chinese_agent",
-      "tags": [
-        "evaluation",
-        "multilingual",
-        "voice"
-      ],
-      "citations": 0,
-      "abstract": "Despite recent progress in Natural Language Understanding (NLU), the creation of multilingual NLU systems remains a challenge. It is common to have NLU systems limited to a subset of languages due to lack of available data. They also often vary widely in performance. We launch a three-phase approach to address the limitations in NLU and help propel NLU technology to new heights. We release a 52 language dataset called the Multilingual Amazon SLU resource package (SLURP) for Slot-filling, Intent classification, and Virtual assistant Evaluation, or MASSIVE, in an effort to address parallel data availability for voice assistants. We organize the Massively Multilingual NLU 2022 Challenge to provide a competitive environment and push the state-of-the art in the transferability of models into other languages. Finally, we host the first Massively Multilingual NLU workshop which brings these components together. The MMNLU workshop seeks to advance the science behind multilingual NLU by providi",
       "key_findings": [],
       "methodology": "",
       "car_control_insight": "",

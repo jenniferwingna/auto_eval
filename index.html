@@ -196,7 +196,7 @@ footer{background:#0f172a;border-top:1px solid #1e293b;padding:16px;text-align:c
   <h1>车控 Agent <span>评测研究门户</span></h1>
   <p class="hero-desc">自动检索 · 智能摘要 · 洞察提取 · 评测集生成<br>将前沿学术成果系统性地应用到智能座舱 Agent 评测中</p>
   <div class="hero-stats">
-    <div class="hstat"><span class="dot blue"></span><div class="num">36</div><div class="info"><span class="lbl">收录论文</span><span class="sub">Semantic Scholar + arXiv</span></div></div>
+    <div class="hstat"><span class="dot blue"></span><div class="num">35</div><div class="info"><span class="lbl">收录论文</span><span class="sub">Semantic Scholar + arXiv</span></div></div>
     <div class="hstat"><span class="dot green"></span><div class="num">5</div><div class="info"><span class="lbl">研究方向</span><span class="sub">Agent · FC · 车载</span></div></div>
     <div class="hstat"><span class="dot amber"></span><div class="num">14</div><div class="info"><span class="lbl">车控强相关</span><span class="sub">含中文启示</span></div></div>
     <div class="hstat"><span class="dot purple"></span><div class="num" id="hero-approved">0</div><div class="info"><span class="lbl">已采纳用例</span><span class="sub">待审批: 31</span></div></div>
@@ -210,8 +210,8 @@ footer{background:#0f172a;border-top:1px solid #1e293b;padding:16px;text-align:c
   <div class="sec-hdr"><h2>📄 论文数据库</h2><p>收录 LLM Agent 评测、函数调用、车载 Agent 等方向的代表性论文。点击 📖 展开中文摘要和关键发现。</p></div>
   <div class="fbar">
     <input type="text" placeholder="🔍 搜索论文标题/作者/摘要..." id="searchBox" oninput="filterPapers()">
-    <button class="tbtn active" data-topic="all" onclick="filterTopic('all',this)">全部<span class="tcnt">36</span></button>
-    <button class="tbtn" data-topic="agent_evaluation" style="--tc:#3b82f6" onclick="filterTopic('agent_evaluation',this)">Agent 评测框架<span class="tcnt">11</span></button><button class="tbtn" data-topic="function_calling" style="--tc:#10b981" onclick="filterTopic('function_calling',this)">函数调用评测<span class="tcnt">10</span></button><button class="tbtn" data-topic="car_agent" style="--tc:#f59e0b" onclick="filterTopic('car_agent',this)">车载 Agent<span class="tcnt">7</span></button><button class="tbtn" data-topic="eval_methodology" style="--tc:#8b5cf6" onclick="filterTopic('eval_methodology',this)">评测方法论<span class="tcnt">5</span></button><button class="tbtn" data-topic="chinese_agent" style="--tc:#ef4444" onclick="filterTopic('chinese_agent',this)">中文 Agent<span class="tcnt">3</span></button>
+    <button class="tbtn active" data-topic="all" onclick="filterTopic('all',this)">全部<span class="tcnt">35</span></button>
+    <button class="tbtn" data-topic="agent_evaluation" style="--tc:#3b82f6" onclick="filterTopic('agent_evaluation',this)">Agent 评测框架<span class="tcnt">11</span></button><button class="tbtn" data-topic="function_calling" style="--tc:#10b981" onclick="filterTopic('function_calling',this)">函数调用评测<span class="tcnt">10</span></button><button class="tbtn" data-topic="car_agent" style="--tc:#f59e0b" onclick="filterTopic('car_agent',this)">车载 Agent<span class="tcnt">7</span></button><button class="tbtn" data-topic="eval_methodology" style="--tc:#8b5cf6" onclick="filterTopic('eval_methodology',this)">评测方法论<span class="tcnt">5</span></button><button class="tbtn" data-topic="chinese_agent" style="--tc:#ef4444" onclick="filterTopic('chinese_agent',this)">中文 Agent<span class="tcnt">2</span></button>
     <select onchange="sortPapers(this.value)" style="padding:5px 10px;border:1px solid #e2e8f0;border-radius:8px;font-size:12px">
       <option value="relevance">按车控相关度</option>
       <option value="citations">按引用数</option>
@@ -1094,37 +1094,12 @@ footer{background:#0f172a;border-top:1px solid #1e293b;padding:16px;text-align:c
               
             </div>
           </div>
-        </div>
-        <div class="pcard" data-topic="chinese_agent" data-year="2022" data-score="0" id="paper-api-0035">
-          <div class="pcard-top">
-            <span class="pcard-topic" style="background:#ef4444">中文 Agent</span>
-            
-            <span class="pcard-year">2022</span>
-            
-            <button class="pcard-expand" onclick="togglePaperDetail('api-0035')" title="展开中文详情">📖</button>
-          </div>
-          <h3 class="pcard-title"><a href="http://arxiv.org/abs/2212.06346v1" target="_blank">The Massively Multilingual Natural Language Understanding 2022 (MMNLU-22) Workshop and Competition</a></h3>
-          
-          <p class="pcard-auth">Christopher Hench, Charith Peris, Jack FitzGerald, Kay Rottmann</p>
-          <p class="pcard-abs">Despite recent progress in Natural Language Understanding (NLU), the creation of multilingual NLU systems remains a challenge. It is common to have NLU systems limited to a subset of languages due to lack of available data. They also often vary widely in performance. We launch a three-phase approach...</p>
-          <div class="pcard-tags"><span class="tag">evaluation</span><span class="tag">multilingual</span><span class="tag">voice</span></div>
-          
-
-          <div class="pcard-detail" id="detail-api-0035" style="display:none">
-            <div class="detail-inner">
-              <h4>📝 中文摘要</h4>
-              <p>暂无中文摘要</p>
-              
-              
-              
-            </div>
-          </div>
         </div></div>
 </div>
 
 <!-- TAB 2: 车控启示 -->
 <div class="tab-content" id="tab-insights">
-  <div class="sec-hdr"><h2>💡 跨论文洞察</h2><p>从 36 篇论文中提取的 6 个共识，映射到车控评测改进方向</p></div>
+  <div class="sec-hdr"><h2>💡 跨论文洞察</h2><p>从 35 篇论文中提取的 6 个共识，映射到车控评测改进方向</p></div>
   <div class="igrid">
         <div class="ins-card">
           <h3>从静态到有状态的评测范式转变</h3>
@@ -1911,7 +1886,7 @@ footer{background:#0f172a;border-top:1px solid #1e293b;padding:16px;text-align:c
   <div class="about-inner">
     <h2>ℹ️ 关于 Auto-Eval Research</h2>
     <p>自动化评测研究流水线：多源检索 → 去重合并 → 结构化摘要 → 跨论文洞察 → 车控映射 → <b>评测集生成</b>。</p>
-    <p style="margin-top:6px"><b>数据源:</b> Semantic Scholar API, arXiv API · <b>每日更新:</b> GitHub Actions 每天 UTC 2:00 自动运行 · <b>更新时间:</b> 2026-09-29 07:55 · <b>代码:</b> <a href="https://github.com/jenniferwingna/auto_eval" target="_blank">GitHub</a></p>
+    <p style="margin-top:6px"><b>数据源:</b> Semantic Scholar API, arXiv API · <b>每日更新:</b> GitHub Actions 每天 UTC 2:00 自动运行 · <b>更新时间:</b> 2026-09-30 08:03 · <b>代码:</b> <a href="https://github.com/jenniferwingna/auto_eval" target="_blank">GitHub</a></p>
   </div>
 </div>
 
