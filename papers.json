@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-26T07:27:40.841708",
-  "total_papers": 35,
+  "generated_at": "2026-10-27T07:21:39.132547",
+  "total_papers": 36,
   "papers": [
     {
       "id": "toolbench-2023",
@@ -954,6 +954,33 @@
     },
     {
       "id": "api-0029",
+      "title": "Voice-Based Smart Assistant System for Vehicles using RASA",
+      "authors": [
+        "Aditya Paranjape",
+        "Yash Patwardhan",
+        "Vedant Deshpande",
+        "Aniket Darp",
+        "Jayashree Jagdale"
+      ],
+      "year": 2023,
+      "venue": "",
+      "url": "http://arxiv.org/abs/2312.01642v1",
+      "topic": "car_agent",
+      "tags": [
+        "safety",
+        "car",
+        "voice"
+      ],
+      "citations": 0,
+      "abstract": "Conversational AIs, or chatbots, mimic human speech when conversing. Smart assistants facilitate the automation of several tasks that needed human intervention earlier. Because of their accuracy, absence of dependence on human resources, and accessibility around the clock, chatbots can be employed in vehicles too. Due to people's propensity to divert their attention away from the task of driving while engaging in other activities like calling, playing music, navigation, and getting updates on the weather forecast and latest news, road safety has declined and accidents have increased as a result. It would be advantageous to automate these tasks using voice commands rather than carrying them out manually. This paper focuses on the development of a voice-based smart assistance application for vehicles based on the RASA framework. The smart assistant provides functionalities like navigation, communication via calls, getting weather forecasts and the latest news updates, and music that are ",
+      "key_findings": [],
+      "methodology": "",
+      "car_control_insight": "",
+      "car_control_score": 0,
+      "source": "arxiv"
+    },
+    {
+      "id": "api-0030",
       "title": "FFT: Towards Harmlessness Evaluation and Analysis for LLMs with Factuality, Fairness, Toxicity",
       "authors": [
         "Shiyao Cui",
@@ -981,7 +1008,7 @@
       "source": "arxiv"
     },
     {
-      "id": "api-0030",
+      "id": "api-0031",
       "title": "Design, Results and Industry Implications of the World's First Insurance Large Language Model Evaluation Benchmark",
       "authors": [
         "Hua Zhou",
@@ -1008,7 +1035,7 @@
       "source": "arxiv"
     },
     {
-      "id": "api-0031",
+      "id": "api-0032",
       "title": "Enhancing Multilingual Speech Recognition through Language Prompt Tuning and Frame-Level Language Adapter",
       "authors": [
         "Song Li",
@@ -1034,7 +1061,7 @@
       "source": "arxiv"
     },
     {
-      "id": "api-0032",
+      "id": "api-0033",
       "title": "MultiMed: Multilingual Medical Speech Recognition via Attention Encoder Decoder",
       "authors": [
         "Khai Le-Duc",
@@ -1066,7 +1093,7 @@
       "source": "arxiv"
     },
     {
-      "id": "api-0033",
+      "id": "api-0034",
       "title": "VoiceAgentBench: Are Voice Assistants ready for agentic tasks?",
       "authors": [
         "Dhruv Jain",
@@ -1097,7 +1124,7 @@
       "source": "arxiv"
     },
     {
-      "id": "api-0034",
+      "id": "api-0035",
       "title": "MSR-86K: An Evolving, Multilingual Corpus with 86,300 Hours of Transcribed Audio for Speech Recognition Research",
       "authors": [
         "Song Li",
