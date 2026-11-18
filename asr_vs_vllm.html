@@ -1,0 +1,408 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>大桌与小桌</title>
+<style>
+/* ======================================================================
+   DESIGN PLAN
+   Layout: a vertical storyboard (comic-strip style), not a live sim —
+   two worked examples with fixed numbers, read top to bottom: an 8-seat
+   "must-leave-together" table, then one independently-turning small table.
+   Every frame is a static snapshot with its own caption, so the reader
+   can follow one concrete story instead of watching abstract motion.
+   Color: amber = the big fixed table, teal = the small independent tables.
+   Type: Space Grotesk for headings/labels, Inter for body text.
+   ====================================================================== */
+:root{
+  --bg:#0f1115; --surface:#171a21; --surface-2:#1e222b;
+  --fg:#eef0f3; --muted:#9aa2b1; --border:#2a2f3a;
+  --bus:#f5a623; --bus-soft:#4a3a1c; --bus-dim:#8a6a2f;
+  --ride:#2dd4bf; --ride-soft:#17332f; --ride-dim:#2f7e74;
+  --chip-bg:#1b1f27;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe9;
+    --fg:#181a1d; --muted:#656c79; --border:#e4e1d9;
+    --bus:#b8690a; --bus-soft:#f4e2bd; --bus-dim:#c9820f;
+    --ride:#0b8f80; --ride-soft:#d4efea; --ride-dim:#13a393;
+    --chip-bg:#f1efe9;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe9;
+  --fg:#181a1d; --muted:#656c79; --border:#e4e1d9;
+  --bus:#b8690a; --bus-soft:#f4e2bd; --bus-dim:#c9820f;
+  --ride:#0b8f80; --ride-soft:#d4efea; --ride-dim:#13a393;
+  --chip-bg:#f1efe9; color-scheme: light;
+}
+:root[data-theme="dark"]{
+  --bg:#0f1115; --surface:#171a21; --surface-2:#1e222b;
+  --fg:#eef0f3; --muted:#9aa2b1; --border:#2a2f3a;
+  --bus:#f5a623; --bus-soft:#4a3a1c; --bus-dim:#8a6a2f;
+  --ride:#2dd4bf; --ride-soft:#17332f; --ride-dim:#2f7e74;
+  --chip-bg:#1b1f27; color-scheme: dark;
+}
+
+*{box-sizing:border-box;}
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+  padding-block:28px 56px;
+}
+.wrap{max-width:720px; margin:0 auto;}
+h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif; margin:0; letter-spacing:-.01em;}
+h1{font-size:clamp(22px,4.5vw,30px); text-wrap:balance; line-height:1.3;}
+h2{font-size:19px; margin:0 0 4px;}
+.kicker{color:var(--muted); font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; margin:0 0 8px;}
+.lede{color:var(--muted); font-size:15px; line-height:1.7; margin:14px 0 0;}
+p{line-height:1.75; font-size:15px;}
+b{color:var(--fg);}
+
+.section{margin-top:40px;}
+.section-head{display:flex; align-items:baseline; gap:10px; margin-bottom:6px;}
+.badge{font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; padding:3px 9px; border-radius:999px; flex:none;}
+.badge.bus{background:var(--bus-soft); color:var(--bus);}
+.badge.ride{background:var(--ride-soft); color:var(--ride);}
+.section-sub{color:var(--muted); font-size:13.5px; margin:2px 0 18px;}
+
+.setup{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:14px 16px; font-size:14px; line-height:1.75; margin-bottom:18px;}
+.setup table{width:100%; border-collapse:collapse; margin-top:8px; font-size:13.5px;}
+.setup td{padding:4px 6px; border-top:1px dashed var(--border);}
+.setup tr:first-child td{border-top:none; color:var(--muted); font-size:12px;}
+
+.frame{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:14px 16px; margin-bottom:10px;}
+.frame-time{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:13px; color:var(--bus); margin-bottom:9px; display:flex; align-items:center; gap:8px;}
+.frame.ride .frame-time{color:var(--ride);}
+.frame-time .line{flex:1; height:1px; background:var(--border);}
+
+.seats8{display:grid; grid-template-columns:repeat(8,1fr); gap:6px; margin-bottom:10px;}
+.seat{aspect-ratio:1; border-radius:8px; border:1.5px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:12px; gap:1px; background:transparent; color:var(--muted);}
+.seat .nm{font-weight:700; font-size:13px;}
+.seat .st{font-size:9px;}
+.seat.eating{background:var(--bus); border-color:var(--bus); color:#201300;}
+.seat.done{background:var(--bus-soft); border-color:var(--bus-dim); color:var(--bus);}
+.seat.empty{opacity:.35; border-style:dashed;}
+
+.cap{font-size:14px; line-height:1.7; margin:0;}
+.cap b{color:var(--bus);}
+.frame.ride .cap b{color:var(--ride);}
+
+.summary{background:var(--bus-soft); border:1px solid var(--bus-dim); border-radius:14px; padding:14px 16px; font-size:14px; line-height:1.75; margin-top:14px;}
+.summary.ride{background:var(--ride-soft); border-color:var(--ride-dim);}
+
+.onetable{display:flex; align-items:center; gap:14px; margin-bottom:10px;}
+.tbl{width:56px; height:56px; flex:none; border-radius:10px; border:2px solid var(--ride); background:var(--ride-soft); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; color:var(--ride);}
+.tbl.idle{border-style:dashed; color:var(--muted); background:transparent;}
+.history{font-size:12.5px; color:var(--muted); font-family:'Space Grotesk',sans-serif;}
+.history b{color:var(--ride);}
+
+.grid24{display:grid; grid-template-columns:repeat(8,1fr); gap:6px; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:12px; margin:8px 0 6px;}
+.mini{aspect-ratio:1; border-radius:6px; border:1.5px solid var(--border); background:transparent;}
+.mini.on{background:var(--ride); border-color:var(--ride);}
+.snapnote{font-size:12px; color:var(--muted); text-align:center; margin:0;}
+
+.mathbox{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:16px 18px; font-size:14px; line-height:1.85; margin-top:16px;}
+.mathbox .row{display:flex; justify-content:space-between; gap:10px; padding:6px 0; border-top:1px dashed var(--border);}
+.mathbox .row:first-of-type{border-top:none;}
+.mathbox .k{color:var(--muted);}
+.mathbox .v{font-family:'Space Grotesk',sans-serif; font-weight:700; font-variant-numeric:tabular-nums;}
+.mathbox .v.bus{color:var(--bus);}
+.mathbox .v.ride{color:var(--ride);}
+.mathbox .final{margin-top:10px; padding-top:10px; border-top:1px solid var(--border); font-size:14.5px;}
+
+.realwrap{margin-top:40px;}
+.realgrid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;}
+@media (max-width:560px){ .realgrid{grid-template-columns:1fr;} }
+.rchip{background:var(--chip-bg); border:1px solid var(--border); border-radius:12px; padding:14px 16px;}
+.rchip .rh{font-size:11.5px; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; margin-bottom:8px;}
+.rchip .rrow{display:flex; justify-content:space-between; padding:4px 0; border-top:1px dashed var(--border); font-size:13px;}
+.rchip .rrow:first-of-type{border-top:none;}
+.rchip .rv{font-family:'Space Grotesk',sans-serif; font-weight:700;}
+.rchip.bus .rv{color:var(--bus);}
+.rchip.ride .rv{color:var(--ride);}
+
+.takeaway{background:linear-gradient(135deg,var(--bus-soft),var(--ride-soft)); border:1px solid var(--border); border-radius:16px; padding:20px 22px; line-height:1.8; font-size:15.5px; margin-top:24px;}
+
+.jargon{display:flex; gap:10px; align-items:flex-start; background:var(--surface-2); border:1px solid var(--border); border-left:3px solid var(--ride); border-radius:10px; padding:11px 14px; margin:0 0 18px; font-size:13px; line-height:1.7; color:var(--muted);}
+.jargon .tag{flex:none; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:11px; color:var(--ride); text-transform:uppercase; letter-spacing:.04em; padding-top:1px; white-space:nowrap;}
+.jargon b{color:var(--fg);}
+.jargon.bus{border-left-color:var(--bus);}
+.jargon.bus .tag{color:var(--bus);}
+
+.qawrap{margin-top:40px;}
+.qa{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:18px 20px; margin-bottom:14px;}
+.qa h3{font-size:15.5px; margin-bottom:10px; line-height:1.5;}
+.qa .ans{font-size:14.5px; line-height:1.75; margin:0 0 4px; color:var(--fg);}
+.qa .jargon{margin:10px 0 0;}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<div class="wrap">
+  <p class="kicker">一个食堂的故事</p>
+  <h1>为什么"一直坐满"的大桌子，反而不如"经常空着"的小桌子服务得快？</h1>
+  <p class="lede">不用记任何技术名词，跟着同一群人、同一个食堂，从头走一遍就懂了。</p>
+
+  <!-- ===================== 场景一 ===================== -->
+  <div class="section">
+    <div class="section-head"><span class="badge bus">场景一</span><h2>8人一桌，必须一起坐、一起走</h2></div>
+    <p class="section-sub">这是 ASR 引擎"8路一起处理"的真实做法</p>
+
+    <div class="setup">
+      食堂有一张 8 人桌，<b>规矩是：必须凑够 8 个人一起坐下，也必须等这 8 个人全部吃完，服务员才会一次性清桌，换下一批 8 人。</b>这 8 位同事吃饭的速度不一样：
+      <table>
+        <tr><td>姓名</td><td>甲</td><td>乙</td><td>丙</td><td>丁</td><td>戊</td><td>己</td><td>庚</td><td>辛</td></tr>
+        <tr><td>吃完要几分钟</td><td>2</td><td>3</td><td>3</td><td>4</td><td>5</td><td>5</td><td>6</td><td>8</td></tr>
+      </table>
+    </div>
+
+    <div class="jargon bus"><span class="tag">专业说法</span><span>固定批大小的同步批处理（<b>Static / Lockstep Batching</b>）——所有请求必须同时进、同时出。这正是 ASR 引擎 E4 批处理模式（<b>INFER_BATCH=8</b>，所有槽位按 uniform-KV-length 同步前进）的真实调度方式。</span></div>
+
+    <div class="frame">
+      <div class="frame-time">第 0 分钟<span class="line"></span></div>
+      <div class="seats8">
+        <div class="seat eating"><span class="nm">甲</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">乙</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">丙</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">丁</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">戊</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">己</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">庚</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">辛</span><span class="st">吃饭中</span></div>
+      </div>
+      <p class="cap">8 位同事同时坐下，一起开吃。</p>
+    </div>
+
+    <div class="frame">
+      <div class="frame-time">第 2 分钟<span class="line"></span></div>
+      <div class="seats8">
+        <div class="seat done"><span class="nm">甲</span><span class="st">吃完了</span></div>
+        <div class="seat eating"><span class="nm">乙</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">丙</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">丁</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">戊</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">己</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">庚</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">辛</span><span class="st">吃饭中</span></div>
+      </div>
+      <p class="cap"><b>甲</b>最先吃完。但规矩是整桌一起走，甲不能提前离开——他只能坐着，占着位置，但什么事也做不了。</p>
+    </div>
+
+    <div class="frame">
+      <div class="frame-time">第 3 分钟<span class="line"></span></div>
+      <div class="seats8">
+        <div class="seat done"><span class="nm">甲</span><span class="st">干等中</span></div>
+        <div class="seat done"><span class="nm">乙</span><span class="st">吃完了</span></div>
+        <div class="seat done"><span class="nm">丙</span><span class="st">吃完了</span></div>
+        <div class="seat eating"><span class="nm">丁</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">戊</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">己</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">庚</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">辛</span><span class="st">吃饭中</span></div>
+      </div>
+      <p class="cap"><b>乙、丙</b>也吃完了。8 个位置里已经有 3 个人在干等，真正还在吃的只剩 5 个人——但从远处看，这张桌子还是"满的"。</p>
+    </div>
+
+    <div class="frame">
+      <div class="frame-time">第 5 分钟<span class="line"></span></div>
+      <div class="seats8">
+        <div class="seat done"><span class="nm">甲</span><span class="st">干等中</span></div>
+        <div class="seat done"><span class="nm">乙</span><span class="st">干等中</span></div>
+        <div class="seat done"><span class="nm">丙</span><span class="st">干等中</span></div>
+        <div class="seat done"><span class="nm">丁</span><span class="st">干等中</span></div>
+        <div class="seat done"><span class="nm">戊</span><span class="st">吃完了</span></div>
+        <div class="seat done"><span class="nm">己</span><span class="st">吃完了</span></div>
+        <div class="seat eating"><span class="nm">庚</span><span class="st">吃饭中</span></div>
+        <div class="seat eating"><span class="nm">辛</span><span class="st">吃饭中</span></div>
+      </div>
+      <p class="cap">丁、戊、己也吃完了。现在 6 个人在干等，只剩<b>庚、辛</b>还在吃。</p>
+    </div>
+
+    <div class="frame">
+      <div class="frame-time">第 6 分钟<span class="line"></span></div>
+      <div class="seats8">
+        <div class="seat done"><span class="nm">甲</span><span class="st">干等中</span></div>
+        <div class="seat done"><span class="nm">乙</span><span class="st">干等中</span></div>
+        <div class="seat done"><span class="nm">丙</span><span class="st">干等中</span></div>
+        <div class="seat done"><span class="nm">丁</span><span class="st">干等中</span></div>
+        <div class="seat done"><span class="nm">戊</span><span class="st">干等中</span></div>
+        <div class="seat done"><span class="nm">己</span><span class="st">干等中</span></div>
+        <div class="seat done"><span class="nm">庚</span><span class="st">吃完了</span></div>
+        <div class="seat eating"><span class="nm">辛</span><span class="st">吃饭中</span></div>
+      </div>
+      <p class="cap">庚也吃完了。现在只剩<b>辛</b>一个人还在吃，其余 7 人——包括 2 分钟就吃完的甲——全部在陪他干坐着。</p>
+    </div>
+
+    <div class="frame">
+      <div class="frame-time">第 8 分钟<span class="line"></span></div>
+      <div class="seats8">
+        <div class="seat empty"><span class="nm">·</span><span class="st">已清桌</span></div>
+        <div class="seat empty"><span class="nm">·</span><span class="st">已清桌</span></div>
+        <div class="seat empty"><span class="nm">·</span><span class="st">已清桌</span></div>
+        <div class="seat empty"><span class="nm">·</span><span class="st">已清桌</span></div>
+        <div class="seat empty"><span class="nm">·</span><span class="st">已清桌</span></div>
+        <div class="seat empty"><span class="nm">·</span><span class="st">已清桌</span></div>
+        <div class="seat empty"><span class="nm">·</span><span class="st">已清桌</span></div>
+        <div class="seat empty"><span class="nm">·</span><span class="st">已清桌</span></div>
+      </div>
+      <p class="cap"><b>辛</b>终于吃完——他是这一桌最慢的。这时候服务员才把 8 个空位一次性清空，换下一批 8 人坐下，重新开始。</p>
+    </div>
+
+    <div class="summary">
+      这一桌，从坐下到清桌，整整用了 <b>8 分钟</b>，只服务了 <b>8 个人</b>。表面上看，这张桌子几乎没有一刻是空的——旁边的人会说"这桌生意真好，利用率真高"。但其实，8 个人里有 6 个人提前吃完，却被迫多坐了几分钟陪别人，这些被占用的时间，没有换来任何新客人。
+    </div>
+  </div>
+
+  <!-- ===================== 场景二 ===================== -->
+  <div class="section">
+    <div class="section-head"><span class="badge ride">场景二</span><h2>24张小桌，谁吃完谁走，立刻换人</h2></div>
+    <p class="section-sub">这是 vLLM"24路各自独立处理"的真实做法</p>
+
+    <div class="setup">
+      同一个食堂，换一种规矩：<b>不设大桌，改成 24 张只坐 1 人的小桌。谁吃完，服务员立刻清桌，让下一位已经在等的客人马上坐下——不需要凑齐一批人，也不用等任何人。</b>先看其中一张小桌的故事：
+    </div>
+
+    <div class="jargon"><span class="tag">专业说法</span><span>连续批处理 / 动态批处理（<b>Continuous Batching / Dynamic Batching</b>）——这是 vLLM 的核心调度机制，请求随到随服务，一结束立刻释放资源给下一个请求，不需要等整批一起凑齐。</span></div>
+
+    <div class="frame ride">
+      <div class="frame-time">第 0 分钟<span class="line"></span></div>
+      <div class="onetable">
+        <div class="tbl">A</div>
+        <div class="history">顾客 <b>A</b> 坐下，预计吃 3 分钟。</div>
+      </div>
+      <p class="cap">这是 24 张小桌中的一张。顾客 A 坐下开吃。</p>
+    </div>
+
+    <div class="frame ride">
+      <div class="frame-time">第 3 分钟<span class="line"></span></div>
+      <div class="onetable">
+        <div class="tbl">B</div>
+        <div class="history">已服务：<b>A</b> → 现在是 <b>B</b>（预计 5 分钟）</div>
+      </div>
+      <p class="cap">A 吃完离开。服务员不用等任何人，立刻清桌，顾客 B 马上坐下——这张桌子没有一秒钟被浪费。</p>
+    </div>
+
+    <div class="frame ride">
+      <div class="frame-time">第 8 分钟<span class="line"></span></div>
+      <div class="onetable">
+        <div class="tbl">C</div>
+        <div class="history">已服务：<b>A → B</b> → 现在是 <b>C</b>（预计 2 分钟）</div>
+      </div>
+      <p class="cap">B 吃完离开，顾客 C 立刻坐下。</p>
+    </div>
+
+    <div class="frame ride">
+      <div class="frame-time">第 10 分钟<span class="line"></span></div>
+      <div class="onetable">
+        <div class="tbl">D</div>
+        <div class="history">已服务：<b>A → B → C</b> → 现在是 <b>D</b>（预计 4 分钟）</div>
+      </div>
+      <p class="cap">C 吃完，顾客 D 立刻坐下。</p>
+    </div>
+
+    <div class="frame ride">
+      <div class="frame-time">第 14 分钟<span class="line"></span></div>
+      <div class="onetable">
+        <div class="tbl idle">空</div>
+        <div class="history">已服务：<b>A → B → C → D</b>，下一位客人正在赶来</div>
+      </div>
+      <p class="cap">D 吃完离开。这张桌子 14 分钟里独立服务了 <b>4 位</b>客人——没有一个人是在"陪别人干等"。这一刻桌子正好空着，是因为下一位客人还没进店，不是因为效率差。</p>
+    </div>
+
+    <div class="setup" style="margin-top:14px;">
+      食堂里一共有 24 张这样的小桌，每一张都在像上面这样<b>各自独立</b>运作。某一瞬间拍张照，你会看到有的桌子忙、有的桌子正好空着（客人刚走，下一位还没到）——这是下面这种画面：
+    </div>
+
+    <div class="grid24" aria-hidden="true">
+      <div class="mini on"></div><div class="mini"></div><div class="mini"></div><div class="mini on"></div>
+      <div class="mini"></div><div class="mini"></div><div class="mini"></div><div class="mini on"></div>
+      <div class="mini"></div><div class="mini"></div><div class="mini on"></div><div class="mini"></div>
+      <div class="mini"></div><div class="mini"></div><div class="mini"></div><div class="mini"></div>
+      <div class="mini on"></div><div class="mini"></div><div class="mini"></div><div class="mini"></div>
+      <div class="mini"></div><div class="mini"></div><div class="mini"></div><div class="mini"></div>
+    </div>
+    <p class="snapnote">24 张桌子中某一瞬间的快照（示意）：亮色 = 正在服务客人，灰色 = 暂时空着</p>
+
+    <div class="summary ride">
+      这一瞬间，24 张桌子里只有 5 张在忙（约 20%）。路过的人可能会说"这家店生意不好，桌子都空着"。但其实，每张空桌都只是在"等下一位客人进店"，并没有谁被迫陪别人多坐——所以这家店整体的接待速度，并不比"一直看起来满座"的大桌子慢。
+    </div>
+  </div>
+
+  <!-- ===================== 对比算一算 ===================== -->
+  <div class="section">
+    <div class="section-head"><h2>把两种店放在一起算一笔账</h2></div>
+    <div class="mathbox">
+      <div class="row"><span class="k">大桌子：8分钟服务了几个人</span><span class="v bus">8 人</span></div>
+      <div class="row"><span class="k">大桌子：平均每分钟服务</span><span class="v bus">1.0 人/分钟</span></div>
+      <div class="row"><span class="k">一张小桌：14分钟服务了几个人</span><span class="v ride">4 人</span></div>
+      <div class="row"><span class="k">一张小桌：平均每分钟服务</span><span class="v ride">≈0.29 人/分钟</span></div>
+      <div class="row"><span class="k">24 张小桌一起算，每分钟服务</span><span class="v ride">≈6.9 人/分钟</span></div>
+      <div class="final">这组数字是用上面两个小例子简单推算出来的示意账，不是真实测量值——但它说明了同一个道理：<b>单看一张小桌，经常空着、效率不高；但因为桌子多、谁也不用等谁，24张小桌合起来算总账，反而能比一张"必须凑齐人"的大桌子服务更多人。</b></div>
+    </div>
+  </div>
+
+  <!-- ===================== 对应回真实数字 ===================== -->
+  <div class="realwrap">
+    <div class="section-head"><h2>对应回真实的技术名词和实测数字</h2></div>
+    <p class="section-sub">上面是打比方，帮你建立直觉；下面这组才是报告里真实测出来的数字</p>
+    <div class="realgrid">
+      <div class="rchip bus">
+        <div class="rh">大桌子 = ASR 引擎的 8 路批处理</div>
+        <div class="rrow"><span>GPU 利用率</span><span class="rv">82%</span></div>
+        <div class="rrow"><span>RTF（越小越快）</span><span class="rv">0.67 / 卡</span></div>
+        <div class="rrow"><span>单卡吞吐</span><span class="rv">8.8 条/min</span></div>
+      </div>
+      <div class="rchip ride">
+        <div class="rh">小桌子 = vLLM 的 24 路并发</div>
+        <div class="rrow"><span>GPU 利用率</span><span class="rv">&lt;20%</span></div>
+        <div class="rrow"><span>RTF（越小越快）</span><span class="rv">0.61</span></div>
+        <div class="rrow"><span>吞吐</span><span class="rv">9.8 条/min</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="qawrap">
+    <div class="section-head"><h2>延伸问答：几个容易追问到的点</h2></div>
+    <p class="section-sub">每一条都是"先讲人话，再对回术语"，方便你讲给别人听的同时，自己心里有底</p>
+
+    <div class="qa">
+      <h3>1. 小桌子利用率低，是不是代表这套方案不好？</h3>
+      <p class="ans">不是。利用率回答的是"花的算力钱有没有被用满"，不是"客人等得快不快"。大桌子利用率高，是因为背后永远有人排队等上桌；小桌子利用率低，是因为服务的是真实、断续到达的客人，经常没人很正常——只有像大桌子那种"本该源源不断有活干"的场景，利用率还低，那才是真浪费。</p>
+      <div class="jargon"><span class="tag">专业说法</span><span>GPU 利用率（<b>GPU Utilization</b>）衡量的是硬件资源的忙碌占比，常用于容量规划（<b>Capacity Planning</b>）和成本评估；它和反映响应速度的 RTF（<b>Real-Time Factor</b>）、吞吐量（<b>Throughput</b>）是两个独立维度的指标，不能互相替代，也不能用其中一个去评判另一个。</span></div>
+    </div>
+
+    <div class="qa">
+      <h3>2. 小桌子利用率低，是不是因为用了 WebSocket 这种"打电话"方式？</h3>
+      <p class="ans">不是。电话、微信、纸条，只是"订单怎么传过来"的渠道，跟后厨忙不忙没关系。真正原因是对面是真人在实时说话，还是一堆已经写好的订单——哪怕换个传话方式，只要对面还是互不同步的真人，后厨照样没法攒成整齐的一批。</p>
+      <div class="jargon"><span class="tag">专业说法</span><span>WebSocket 只是传输层协议（<b>Transport Layer Protocol</b>），负责消息怎么送达；真正决定批处理效率的是请求到达模式（<b>Request Arrival Pattern</b>）——批量到达（<b>Batch Arrival</b>）还是异步实时到达（<b>Asynchronous Arrival</b>）。vLLM 的连续批处理调度机制，本来就是为同时服务很多个独立、异步到达的请求设计的。</span></div>
+    </div>
+
+    <div class="qa">
+      <h3>3. 大桌子是离线推理，小桌子是在线推理吗？为什么离线做不出最终产品？</h3>
+      <p class="ans">对。离线推理需要先有一份完整、已经存在的文件才能开始处理；但一段真实对话，只有在说完、挂断之后才算"完整"——可对话都结束了，这时候再回答已经没有意义，这不是"麻烦"的问题，是逻辑上就互相矛盾。</p>
+      <div class="jargon"><span class="tag">专业说法</span><span>对应离线批处理推理（<b>Offline / Batch Inference</b>）与在线实时推理服务（<b>Online / Real-time Serving Inference</b>）的本质区别。在线服务必须满足低延迟约束（例如首字延迟 <b>TTFS, Time To First Sound/Token</b>），这是离线批处理完全不需要考虑的指标。</span></div>
+    </div>
+
+    <div class="qa">
+      <h3>4. 24桌客人是不是"不同时候进店"，才导致忙闲对不上？</h3>
+      <p class="ans">不是"进店时间不同"，是"每桌的内容天生不一样"，走着走着自然就错开了。而且"在听"和"在说"这两种状态，服务员花的功夫也不一样——听的时候只需瞄一眼，说的时候要一个字一个字记，说得越多花的时间越长。</p>
+      <div class="jargon"><span class="tag">专业说法</span><span>这对应 chunk 级别的解码异构性（<b>Heterogeneous Per-chunk Compute</b>）——"listen"决策只需一次前向计算（<b>Single Forward Pass</b>），"speak"决策需要若干次自回归解码步（<b>Autoregressive Decode Steps</b>），回复越长步数越多；24路请求各自的 chunk 边界（<b>Chunk Boundary</b>）天然不对齐，这是动态批处理难以凑成均匀批次（<b>Uniform Batch</b>）的根本原因之一。</span></div>
+    </div>
+
+    <div class="qa">
+      <h3>5. 内容本来就各不相同，再优化小桌子的利用率，空间是不是很有限？</h3>
+      <p class="ans">内容差异这个限制甩不掉，但还有一个更大的变量没测过：把参与的桌子从2张加到200张，哪怕每个客人还是各吃各的，"同时有人忙"的概率也会自然变高——这跟内容是否整齐无关，只跟同时在场的人数有关。</p>
+      <div class="jargon"><span class="tag">专业说法</span><span>这是排队论（<b>Queueing Theory</b>）里的规律——并发度（<b>Concurrency Level</b>）越高，根据大数定律（<b>Law of Large Numbers</b>），瞬时就绪请求数相对均值的波动会变小，批处理填充率（<b>Batch Fill Rate</b>）会更稳定地提高，这和单条请求内容异质性（<b>Content Heterogeneity</b>）是两个独立变量。目前只测过 24 路这一个并发点，真正的利用率天花板需要专门测不同并发度下的利用率变化才能确定。</span></div>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    💡 大桌子利用率高（82%），是因为它背后永远有一堆人排队等上桌，座位几乎不会空，但代价是快的人要陪慢的人干等。小桌子利用率低（&lt;20%），不是因为效率差，是因为每张桌子服务的是真实、节奏参差不齐的客人，经常没人很正常。<b>真正该比的是"每分钟总共服务了几个人"，不是"桌子看起来满不满"——而按这个真实标准，小桌子（0.61）并不比大桌子（0.67）慢，甚至还略快一点。</b>
+  </div>
+</div>
+
+</body></html>
